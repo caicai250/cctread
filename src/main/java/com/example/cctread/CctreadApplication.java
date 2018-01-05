@@ -8,5 +8,6 @@ public class CctreadApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CctreadApplication.class, args);
+
 	}
 }
