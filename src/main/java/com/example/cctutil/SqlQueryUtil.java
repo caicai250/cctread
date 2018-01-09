@@ -1,8 +1,18 @@
 package com.example.cctutil;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.datasource.DataSourceFactory;
+import org.apache.ibatis.mapping.Environment;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.transaction.TransactionFactory;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,6 +34,10 @@ public class SqlQueryUtil {
     Connection conn;
 
     PreparedStatement statement = null;
+
+    @Autowired
+    @Qualifier ("dataSource")
+    private DataSource dataSource;
 
     @Autowired
     private SqlSession sqlSession;
@@ -101,6 +115,13 @@ public class SqlQueryUtil {
 
 
     public SqlSession getSqlSession() {
-        return sqlSession;
+        //DataSource dataSource = DataSourceConfiguration.getDataSource();
+
+        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+        Environment environment = new Environment("development", transactionFactory, dataSource);
+        Configuration configuration = new Configuration(environment);
+        configuration.addMapper(Mapper.class);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
+        return sqlSessionFactory.openSession();
     }
 }
