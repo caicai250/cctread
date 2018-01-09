@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.auto.CodeMapper">
+  <resultMap id="BaseResultMap" type="com.example.entity.Code">
+    <id column="codeid" jdbcType="INTEGER" property="codeid" />
+    <result column="codetype" jdbcType="VARCHAR" property="codetype" />
+    <result column="codeproice" jdbcType="VARCHAR" property="codeproice" />
+    <result column="codename" jdbcType="VARCHAR" property="codename" />
+    <result column="isvalid" jdbcType="CHAR" property="isvalid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    codeid, codetype, codeproice, codename, isvalid
+  </sql>
+  <select id="selectByExample" parameterType="com.example.entity.CodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from code
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from code
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.entity.CodeExample">
+    delete from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.entity.Code">
+    insert into code (codeid, codetype, codeproice, 
+      codename, isvalid)
+    values (#{codeid,jdbcType=INTEGER}, #{codetype,jdbcType=VARCHAR}, #{codeproice,jdbcType=VARCHAR}, 
+      #{codename,jdbcType=VARCHAR}, #{isvalid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.Code">
+    insert into code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="codeid != null">
+        codeid,
+      </if>
+      <if test="codetype != null">
+        codetype,
+      </if>
+      <if test="codeproice != null">
+        codeproice,
+      </if>
+      <if test="codename != null">
+        codename,
+      </if>
+      <if test="isvalid != null">
+        isvalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="codeid != null">
+        #{codeid,jdbcType=INTEGER},
+      </if>
+      <if test="codetype != null">
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeproice != null">
+        #{codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        #{isvalid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.entity.CodeExample" resultType="java.lang.Integer">
+    select count(*) from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update code
+    <set>
+      <if test="record.codeid != null">
+        codeid = #{record.codeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.codetype != null">
+        codetype = #{record.codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeproice != null">
+        codeproice = #{record.codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codename != null">
+        codename = #{record.codename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvalid != null">
+        isvalid = #{record.isvalid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update code
+    set codeid = #{record.codeid,jdbcType=INTEGER},
+      codetype = #{record.codetype,jdbcType=VARCHAR},
+      codeproice = #{record.codeproice,jdbcType=VARCHAR},
+      codename = #{record.codename,jdbcType=VARCHAR},
+      isvalid = #{record.isvalid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.Code">
+    update code
+    <set>
+      <if test="codetype != null">
+        codetype = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeproice != null">
+        codeproice = #{codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        codename = #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        isvalid = #{isvalid,jdbcType=CHAR},
+      </if>
+    </set>
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.Code">
+    update code
+    set codetype = #{codetype,jdbcType=VARCHAR},
+      codeproice = #{codeproice,jdbcType=VARCHAR},
+      codename = #{codename,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=CHAR}
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.entity.Code">
+    <id column="codeid" jdbcType="INTEGER" property="codeid" />
+    <result column="codetype" jdbcType="VARCHAR" property="codetype" />
+    <result column="codeproice" jdbcType="VARCHAR" property="codeproice" />
+    <result column="codename" jdbcType="VARCHAR" property="codename" />
+    <result column="isvalid" jdbcType="CHAR" property="isvalid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    codeid, codetype, codeproice, codename, isvalid
+  </sql>
+  <select id="selectByExample" parameterType="com.example.entity.CodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from code
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from code
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.entity.CodeExample">
+    delete from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.entity.Code">
+    insert into code (codeid, codetype, codeproice, 
+      codename, isvalid)
+    values (#{codeid,jdbcType=INTEGER}, #{codetype,jdbcType=VARCHAR}, #{codeproice,jdbcType=VARCHAR}, 
+      #{codename,jdbcType=VARCHAR}, #{isvalid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.Code">
+    insert into code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="codeid != null">
+        codeid,
+      </if>
+      <if test="codetype != null">
+        codetype,
+      </if>
+      <if test="codeproice != null">
+        codeproice,
+      </if>
+      <if test="codename != null">
+        codename,
+      </if>
+      <if test="isvalid != null">
+        isvalid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="codeid != null">
+        #{codeid,jdbcType=INTEGER},
+      </if>
+      <if test="codetype != null">
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeproice != null">
+        #{codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        #{isvalid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.entity.CodeExample" resultType="java.lang.Integer">
+    select count(*) from code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update code
+    <set>
+      <if test="record.codeid != null">
+        codeid = #{record.codeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.codetype != null">
+        codetype = #{record.codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codeproice != null">
+        codeproice = #{record.codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codename != null">
+        codename = #{record.codename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvalid != null">
+        isvalid = #{record.isvalid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update code
+    set codeid = #{record.codeid,jdbcType=INTEGER},
+      codetype = #{record.codetype,jdbcType=VARCHAR},
+      codeproice = #{record.codeproice,jdbcType=VARCHAR},
+      codename = #{record.codename,jdbcType=VARCHAR},
+      isvalid = #{record.isvalid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.Code">
+    update code
+    <set>
+      <if test="codetype != null">
+        codetype = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="codeproice != null">
+        codeproice = #{codeproice,jdbcType=VARCHAR},
+      </if>
+      <if test="codename != null">
+        codename = #{codename,jdbcType=VARCHAR},
+      </if>
+      <if test="isvalid != null">
+        isvalid = #{isvalid,jdbcType=CHAR},
+      </if>
+    </set>
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.Code">
+    update code
+    set codetype = #{codetype,jdbcType=VARCHAR},
+      codeproice = #{codeproice,jdbcType=VARCHAR},
+      codename = #{codename,jdbcType=VARCHAR},
+      isvalid = #{isvalid,jdbcType=CHAR}
+    where codeid = #{codeid,jdbcType=INTEGER}
+  </update>
+</mapper>

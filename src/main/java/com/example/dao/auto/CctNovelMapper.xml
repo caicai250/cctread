@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.auto.CctNovelMapper" >
+  <resultMap id="BaseResultMap" type="com.example.entity.CctNovel" >
+    <id column="novelid" property="novelid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="noveltype" property="noveltype" jdbcType="CHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="novelstate" property="novelstate" jdbcType="CHAR" />
+    <result column="startdate" property="startdate" jdbcType="DATE" />
+    <result column="updatedate" property="updatedate" jdbcType="DATE" />
+    <result column="ischarge" property="ischarge" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.entity.CctNovel" extends="BaseResultMap" >
+    <result column="nocalcover" property="nocalcover" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    novelid, title, noveltype, author, novelstate, startdate, updatedate, ischarge
+  </sql>
+  <sql id="Blob_Column_List" >
+    nocalcover
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.example.entity.CctNovelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cct_novel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.entity.CctNovelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cct_novel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cct_novel
+    where novelid = #{novelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cct_novel
+    where novelid = #{novelid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.entity.CctNovelExample" >
+    delete from cct_novel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.entity.CctNovel" >
+    insert into cct_novel (novelid, title, noveltype, 
+      author, novelstate, startdate, 
+      updatedate, ischarge, nocalcover
+      )
+    values (#{novelid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{noveltype,jdbcType=CHAR}, 
+      #{author,jdbcType=VARCHAR}, #{novelstate,jdbcType=CHAR}, #{startdate,jdbcType=DATE}, 
+      #{updatedate,jdbcType=DATE}, #{ischarge,jdbcType=CHAR}, #{nocalcover,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.entity.CctNovel" >
+    insert into cct_novel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="novelid != null" >
+        novelid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="noveltype != null" >
+        noveltype,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="novelstate != null" >
+        novelstate,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="ischarge != null" >
+        ischarge,
+      </if>
+      <if test="nocalcover != null" >
+        nocalcover,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="novelid != null" >
+        #{novelid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="noveltype != null" >
+        #{noveltype,jdbcType=CHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="novelstate != null" >
+        #{novelstate,jdbcType=CHAR},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="ischarge != null" >
+        #{ischarge,jdbcType=CHAR},
+      </if>
+      <if test="nocalcover != null" >
+        #{nocalcover,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.entity.CctNovelExample" resultType="java.lang.Integer" >
+    select count(*) from cct_novel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cct_novel
+    <set >
+      <if test="record.novelid != null" >
+        novelid = #{record.novelid,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noveltype != null" >
+        noveltype = #{record.noveltype,jdbcType=CHAR},
+      </if>
+      <if test="record.author != null" >
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.novelstate != null" >
+        novelstate = #{record.novelstate,jdbcType=CHAR},
+      </if>
+      <if test="record.startdate != null" >
+        startdate = #{record.startdate,jdbcType=DATE},
+      </if>
+      <if test="record.updatedate != null" >
+        updatedate = #{record.updatedate,jdbcType=DATE},
+      </if>
+      <if test="record.ischarge != null" >
+        ischarge = #{record.ischarge,jdbcType=CHAR},
+      </if>
+      <if test="record.nocalcover != null" >
+        nocalcover = #{record.nocalcover,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cct_novel
+    set novelid = #{record.novelid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      noveltype = #{record.noveltype,jdbcType=CHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      novelstate = #{record.novelstate,jdbcType=CHAR},
+      startdate = #{record.startdate,jdbcType=DATE},
+      updatedate = #{record.updatedate,jdbcType=DATE},
+      ischarge = #{record.ischarge,jdbcType=CHAR},
+      nocalcover = #{record.nocalcover,jdbcType=LONGVARBINARY}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cct_novel
+    set novelid = #{record.novelid,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      noveltype = #{record.noveltype,jdbcType=CHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      novelstate = #{record.novelstate,jdbcType=CHAR},
+      startdate = #{record.startdate,jdbcType=DATE},
+      updatedate = #{record.updatedate,jdbcType=DATE},
+      ischarge = #{record.ischarge,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.CctNovel" >
+    update cct_novel
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="noveltype != null" >
+        noveltype = #{noveltype,jdbcType=CHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="novelstate != null" >
+        novelstate = #{novelstate,jdbcType=CHAR},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=DATE},
+      </if>
+      <if test="ischarge != null" >
+        ischarge = #{ischarge,jdbcType=CHAR},
+      </if>
+      <if test="nocalcover != null" >
+        nocalcover = #{nocalcover,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where novelid = #{novelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.entity.CctNovel" >
+    update cct_novel
+    set title = #{title,jdbcType=VARCHAR},
+      noveltype = #{noveltype,jdbcType=CHAR},
+      author = #{author,jdbcType=VARCHAR},
+      novelstate = #{novelstate,jdbcType=CHAR},
+      startdate = #{startdate,jdbcType=DATE},
+      updatedate = #{updatedate,jdbcType=DATE},
+      ischarge = #{ischarge,jdbcType=CHAR},
+      nocalcover = #{nocalcover,jdbcType=LONGVARBINARY}
+    where novelid = #{novelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.entity.CctNovel" >
+    update cct_novel
+    set title = #{title,jdbcType=VARCHAR},
+      noveltype = #{noveltype,jdbcType=CHAR},
+      author = #{author,jdbcType=VARCHAR},
+      novelstate = #{novelstate,jdbcType=CHAR},
+      startdate = #{startdate,jdbcType=DATE},
+      updatedate = #{updatedate,jdbcType=DATE},
+      ischarge = #{ischarge,jdbcType=CHAR}
+    where novelid = #{novelid,jdbcType=INTEGER}
+  </update>
+</mapper>
