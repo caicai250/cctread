@@ -1,14 +1,9 @@
 package com.example.cctutil;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.datasource.DataSourceFactory;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
+
+import com.example.mybatisconfig.MybatisConfig;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -36,7 +31,7 @@ public class SqlQueryUtil {
     PreparedStatement statement = null;
 
     @Autowired
-    @Qualifier ("dataSource")
+    @Qualifier ("spring.datasource")
     private DataSource dataSource;
 
     @Autowired
@@ -115,13 +110,14 @@ public class SqlQueryUtil {
 
 
     public SqlSession getSqlSession() {
-        //DataSource dataSource = DataSourceConfiguration.getDataSource();
+       // DataSource dataSource = DataSourceConfiguration.getDataSource();
 
-        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-        Environment environment = new Environment("development", transactionFactory, dataSource);
-        Configuration configuration = new Configuration(environment);
-        configuration.addMapper(Mapper.class);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
+//        TransactionFactory transactionFactory = new JdbcTransactionFactory();
+//        Environment environment = new Environment("development", transactionFactory, dataSource);
+//        Configuration configuration = new Configuration(environment);
+//        configuration.addMapper(Mapper.class);
+        MybatisConfig mbu=new MybatisConfig();
+        SqlSessionFactory sqlSessionFactory = mbu.sqlSessionFactoryBean();
         return sqlSessionFactory.openSession();
     }
 }
