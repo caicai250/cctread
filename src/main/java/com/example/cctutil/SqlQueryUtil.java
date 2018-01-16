@@ -1,11 +1,15 @@
 package com.example.cctutil;
 
-
-import com.example.mybatisconfig.MybatisConfig;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.transaction.jta.TransactionFactory;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -31,11 +35,10 @@ public class SqlQueryUtil {
     PreparedStatement statement = null;
 
     @Autowired
-    @Qualifier ("spring.datasource")
-    private DataSource dataSource;
-
-    @Autowired
     private SqlSession sqlSession;
+
+
+    private DataSource dataSource;
 
     public SqlQueryUtil() {
         super();
@@ -110,14 +113,11 @@ public class SqlQueryUtil {
 
 
     public SqlSession getSqlSession() {
-       // DataSource dataSource = DataSourceConfiguration.getDataSource();
-
-//        TransactionFactory transactionFactory = new JdbcTransactionFactory();
-//        Environment environment = new Environment("development", transactionFactory, dataSource);
-//        Configuration configuration = new Configuration(environment);
-//        configuration.addMapper(Mapper.class);
-        MybatisConfig mbu=new MybatisConfig();
-        SqlSessionFactory sqlSessionFactory = mbu.sqlSessionFactoryBean();
+//        dataSource=(DataSource) BeanUtil.getApplicationContext().getBean("dataSource");
+//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+//        bean.setDataSource(dataSource);
+        SqlSessionFactory sqlSessionFactory= (SqlSessionFactory)BeanUtil.getApplicationContext().getBean("sqlSessionFactory");
+        //configuration.addMapper(Mapper.class);
         return sqlSessionFactory.openSession();
     }
 }
