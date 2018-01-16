@@ -11,6 +11,9 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -22,6 +25,7 @@ import java.util.Vector;
 /**
  * 通过sql公共查询方法
  */
+@Component
 public class SqlQueryUtil {
 
     /**
@@ -36,7 +40,7 @@ public class SqlQueryUtil {
     PreparedStatement statement = null;
 
     @Autowired
-    @Qualifier ("dataSource")
+    @Qualifier("dataSource")
     private DataSource dataSource;
 
     @Autowired
@@ -84,7 +88,7 @@ public class SqlQueryUtil {
      * @param sql 拼装的sql语句
      * @return List<HashMap>
      */
-    @SuppressWarnings ( "unchecked" )
+    @SuppressWarnings("unchecked")
     public static List<HashMap> getQueryInfoByManulSQL(String sql) {
         SqlQueryUtil query = new SqlQueryUtil();
         query.setConnection(query.getSqlSession().getConnection());
@@ -116,6 +120,10 @@ public class SqlQueryUtil {
 
     public SqlSession getSqlSession() {
         //DataSource dataSource = DataSourceConfiguration.getDataSource();
+//        ApplicationContext ac2 = WebApplicationContextUtils.getWebApplicationContext(ServletContext sc);
+//        ac1.getBean("beanId");
+        //TODO 获取dataSource Bean，应该在初始化sql工具是赋值
+        dataSource = (DataSource) BeanUtil.getApplicationContext().getBean("dataSource");
 
         TransactionFactory transactionFactory = new JdbcTransactionFactory();
         Environment environment = new Environment("development", transactionFactory, dataSource);
