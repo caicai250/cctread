@@ -1,15 +1,8 @@
 package com.example.cctutil;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-import org.springframework.transaction.jta.TransactionFactory;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -113,11 +106,7 @@ public class SqlQueryUtil {
 
 
     public SqlSession getSqlSession() {
-//        dataSource=(DataSource) BeanUtil.getApplicationContext().getBean("dataSource");
-//        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-//        bean.setDataSource(dataSource);
         SqlSessionFactory sqlSessionFactory= (SqlSessionFactory)BeanUtil.getApplicationContext().getBean("sqlSessionFactory");
-        //configuration.addMapper(Mapper.class);
         return sqlSessionFactory.openSession();
     }
 }
