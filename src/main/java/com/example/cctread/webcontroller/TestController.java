@@ -18,10 +18,10 @@ public class TestController {
     //        String sql="select * from code";
     //  List<HashMap> list= SqlQueryUtil.getQueryInfoByManulSQL(sql);
     //        System.out.println(list.toString());
-       COSClient cosclient= TencentCOS.createClient();
+       //COSClient cosclient= TencentCOS.createClient();
        //TencentCOS.uploadFile(cosclient);
-       TencentCOS.downloadFile(cosclient);
-       TencentCOS.closeClient(cosclient);
+       //TencentCOS.downloadFile(cosclient);
+       //TencentCOS.closeClient(cosclient);
        return "成功";
     }
 
