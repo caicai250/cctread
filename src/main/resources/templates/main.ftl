@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>常春藤阅读</title>
     <link rel="stylesheet" href="${request.contextPath}/bootstrap-3.3.4-dist/css/bootstrap.css">
     <script src="${request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
@@ -12,7 +13,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand" style="padding:0;"><img style="height: 100%;" src="${request.contextPath}/image/logo.png" alt="瓢城企训网"></a>
+                <a href="#" class="navbar-brand" style="padding:0;"><img style="height: 100%;" src="${request.contextPath}/image/logo.png" alt="${title}"></a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -21,7 +22,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right" style="margin-top:0">
-                    <#list list as em>
+                    <#list listMuen as em>
                         <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
                     </#list>
                     <#--<li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> 首页</a></li>
