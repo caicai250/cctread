@@ -1,9 +1,7 @@
 package com.example.cctread.webcontroller;
 
-import com.example.cctutil.TencentCOS;
+import com.example.cctutil.cos.TencentCOS;
 import com.example.entity.vo.Book;
-import freemarker.ext.beans.HashAdapter;
-import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +23,11 @@ public class MainController {
         list.add(map);
         model.addAttribute("listMuen", list);
         model.addAttribute("title", "常春藤阅读");
+
+
         String chapterName = "斗破苍穹_天蚕土豆_1";
         String content = TencentCOS.getObject(chapterName);
+
         Book book = new Book();
         book.setContent(content);
         book.setChapterName("第一章 XXX1");

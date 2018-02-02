@@ -1,4 +1,4 @@
-package com.example.cctutil;
+package com.example.cctutil.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

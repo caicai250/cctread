@@ -1,5 +1,6 @@
-package com.example.cctutil;
+package com.example.cctutil.sql;
 
+import com.example.cctutil.spring.BeanUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,7 +107,7 @@ public class SqlQueryUtil {
 
 
     public SqlSession getSqlSession() {
-        SqlSessionFactory sqlSessionFactory= (SqlSessionFactory)BeanUtil.getApplicationContext().getBean("sqlSessionFactory");
+        SqlSessionFactory sqlSessionFactory= (SqlSessionFactory) BeanUtil.getApplicationContext().getBean("sqlSessionFactory");
         return sqlSessionFactory.openSession();
     }
 }
