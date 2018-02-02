@@ -10,6 +10,8 @@ import com.qcloud.cos.region.Region;
 import com.qcloud.cos.transfer.Download;
 import com.qcloud.cos.transfer.TransferManager;
 import com.qcloud.cos.transfer.Upload;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import sun.nio.ch.IOUtil;
 
 import java.io.File;
@@ -20,90 +22,93 @@ import java.util.concurrent.Executors;
 
 
 /**
- * ÌÚÑ¶ÔÆ¶ÔÏó´æ´¢·şÎñ
+ * ï¿½ï¿½Ñ¶ï¿½Æ¶ï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½
  *
+ * @updateRemark ä¿®æ”¹javaæ–‡ä»¶ç¼–ç ä¸ºUTF-8ï¼ŒåŸGBKç¼–ç æ±‰å­—æ— æ³•è½¬æ¢
  * @author caic
- * @version 1.0 ´´½¨Ê±¼ä£º2018-01-26 13:59
+ * @version 1.0 ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2018-01-26 13:59
  */
 public class TencentCOS {
 
+    private static final Logger log = LoggerFactory.getLogger(TencentCOS.class);
+
     private static COSClient cosClient;
-    // bucketµÄÃüÃû¹æÔòÎª{name}-{appid} £¬´Ë´¦ÌîĞ´µÄ´æ´¢Í°Ãû³Æ±ØĞëÎª´Ë¸ñÊ½
+    // bucketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª{name}-{appid} ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½Ğ´ï¿½Ä´æ´¢Í°ï¿½ï¿½ï¿½Æ±ï¿½ï¿½ï¿½Îªï¿½Ë¸ï¿½Ê½
     private static final String bucketName = "cctread-1256010222";
 
-    //¿ª·¢Õß·ÃÎÊ COS ·şÎñÊ±ÓµÓĞµÄÓÃ»§Î¬¶ÈÎ¨Ò»×ÊÔ´±êÊ¶£¬ÓÃÒÔ±êÊ¶×ÊÔ´
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ COS ï¿½ï¿½ï¿½ï¿½Ê±Óµï¿½Ğµï¿½ï¿½Ã»ï¿½Î¬ï¿½ï¿½Î¨Ò»ï¿½ï¿½Ô´ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½Ê¶ï¿½ï¿½Ô´
     private static final String AppId = "1256010222";
 
-    //¿ª·¢ÕßÓµÓĞµÄÏîÄ¿Éí·İÊ¶±ğ ID£¬ÓÃÒÔÉí·İÈÏÖ¤
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ğµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ IDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤
     private static final String SecretId = "AKIDBNPH0ZPAE7oKgq6dHk28C757CHBtfmyz";
 
-    //¿ª·¢ÕßÓµÓĞµÄÏîÄ¿Éí·İÃÜÔ¿
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ğµï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿
     private static final String SecretKey = "zoUzOm7XtCbyFPSPFybBev121tZ4MSN6";
 
-    //·şÎñÆ÷ËùÊôÇøÓò
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private static final String region_name = "ap-beijing";
 
-    //Ïß³Ì³Ø
+    //ï¿½ß³Ì³ï¿½
     private static ExecutorService threadPool = Executors.newFixedThreadPool(32);
 
     /**
-     * ´´½¨¿Í»§¶ËÁ¬½Ó
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     private static void createClient() {
         if (cosClient != null) {
             return;
         }
-        // 1 ³õÊ¼»¯ÓÃ»§Éí·İĞÅÏ¢(secretId, secretKey)
+        // 1 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials(SecretId, SecretKey);
-        // 2 ÉèÖÃbucketµÄÇøÓò, COSµØÓòµÄ¼ò³ÆÇë²ÎÕÕ https://cloud.tencent.com/document/product/436/6224
+        // 2 ï¿½ï¿½ï¿½ï¿½bucketï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, COSï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ https://cloud.tencent.com/document/product/436/6224
         ClientConfig clientConfig = new ClientConfig(new Region(region_name));
-        // 3 Éú³Écos¿Í»§¶Ë
+        // 3 ï¿½ï¿½ï¿½ï¿½cosï¿½Í»ï¿½ï¿½ï¿½
         cosClient = new COSClient(cred, clientConfig);
 
         //return cosclient;
     }
 
     /**
-     * ÉÏ´«ÎÄ¼ş
+     * ï¿½Ï´ï¿½ï¿½Ä¼ï¿½
      *
-     * @param file ĞèÒªÉÏ´«µÄÎÄ¼ş
-     * @param key  ·şÎñÆ÷ÎÄ¼şÂ·¾¶
+     * @param file ï¿½ï¿½Òªï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+     * @param key  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
      */
     public static void uploadFile(File file, String key) {
         createClient();
-        // ¼òµ¥ÎÄ¼şÉÏ´«, ×î´óÖ§³Ö 5 GB, ÊÊÓÃÓÚĞ¡ÎÄ¼şÉÏ´«, ½¨Òé 20 M ÒÔÏÂµÄÎÄ¼şÊ¹ÓÃ¸Ã½Ó¿Ú
-        // ´óÎÄ¼şÉÏ´«Çë²ÎÕÕ API ÎÄµµ¸ß¼¶ API ÉÏ´«
+        // ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½, ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ 5 GB, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½Ä¼ï¿½ï¿½Ï´ï¿½, ï¿½ï¿½ï¿½ï¿½ 20 M ï¿½ï¿½ï¿½Âµï¿½ï¿½Ä¼ï¿½Ê¹ï¿½Ã¸Ã½Ó¿ï¿½
+        // ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ API ï¿½Äµï¿½ï¿½ß¼ï¿½ API ï¿½Ï´ï¿½
         //File localFile = new File("D:/test.txt");
-        // Ö¸¶¨ÒªÉÏ´«µ½ COS ÉÏµÄÂ·¾¶
+        // Ö¸ï¿½ï¿½Òªï¿½Ï´ï¿½ï¿½ï¿½ COS ï¿½Ïµï¿½Â·ï¿½ï¿½
         //String key = "/upload_single_demo.txt";
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, file);
         PutObjectResult putObjectResult = cosClient.putObject(putObjectRequest);
     }
 
     /**
-     * ÏÂÔØÎÄ¼ş
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
      *
-     * @param file Ö¸¶¨ÒªÏÂÔØµ½µÄ±¾µØÂ·¾¶
-     * @param key  ·şÎñÆ÷ÎÄ¼şÂ·¾¶
+     * @param file Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Øµï¿½ï¿½Ä±ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+     * @param key  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
      */
     public static void downloadFile(File file, String key) {
         createClient();
-        // Ö¸¶¨ÒªÏÂÔØµ½µÄ±¾µØÂ·¾¶
+        // Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Øµï¿½ï¿½Ä±ï¿½ï¿½ï¿½Â·ï¿½ï¿½
         //File downFile = new File("E:/test.txt");
         //String key = "/upload_single_demo.txt";
-        // Ö¸¶¨ÒªÏÂÔØµÄÎÄ¼şËùÔÚµÄ bucket ºÍÂ·¾¶
+        // Ö¸ï¿½ï¿½Òªï¿½ï¿½ï¿½Øµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Úµï¿½ bucket ï¿½ï¿½Â·ï¿½ï¿½
         GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, key);
         ObjectMetadata downObjectMeta = cosClient.getObject(getObjectRequest, file);
     }
 
     /**
-     * É¾³ıÎÄ¼ş
+     * É¾ï¿½ï¿½ï¿½Ä¼ï¿½
      *
-     * @param key ·şÎñÆ÷ÎÄ¼şÂ·¾¶
+     * @param key ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
      */
     public static void deleteFile(String key) {
         createClient();
-        // Ö¸¶¨ÒªÉ¾³ıµÄ bucket ºÍÂ·¾¶
+        // Ö¸ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½ bucket ï¿½ï¿½Â·ï¿½ï¿½
         cosClient.deleteObject(bucketName, key);
     }
 
@@ -111,64 +116,65 @@ public class TencentCOS {
         if (cosClient == null) {
             return;
         }
-        // ¹Ø±Õ¿Í»§¶Ë(¹Ø±ÕºóÌ¨Ïß³Ì)
+        // ï¿½Ø±Õ¿Í»ï¿½ï¿½ï¿½(ï¿½Ø±Õºï¿½Ì¨ï¿½ß³ï¿½)
         cosClient.shutdown();
     }
 
     /**
-     * Òì²½ÉÏ´«ÎÄ¼ş
+     * ï¿½ì²½ï¿½Ï´ï¿½ï¿½Ä¼ï¿½
      *
-     * @param file ĞèÒªÉÏ´«µÄÎÄ¼ş
-     * @param key  ·şÎñÆ÷ÎÄ¼şÂ·¾¶
+     * @param file ï¿½ï¿½Òªï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+     * @param key  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
      */
     public static void upload(File file, String key) {
         createClient();
-        // ´«ÈëÒ»¸öthreadpool, Èô²»´«ÈëÏß³Ì³Ø, Ä¬ÈÏTransferManagerÖĞ»áÉú³ÉÒ»¸öµ¥Ïß³ÌµÄÏß³Ì³Ø¡£
+        // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½threadpool, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½, Ä¬ï¿½ï¿½TransferManagerï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ß³Ì³Ø¡ï¿½
         TransferManager transferManager = new TransferManager(cosClient, threadPool);
         PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, file);
-        // ±¾µØÎÄ¼şÉÏ´«
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½
         Upload upload = transferManager.upload(putObjectRequest);
-        // µÈ´ı´«Êä½áÊø£¨Èç¹ûÏëÍ¬²½µÄµÈ´ıÉÏ´«½áÊø£¬Ôòµ÷ÓÃ waitForCompletion£©
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ÄµÈ´ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ waitForCompletionï¿½ï¿½
         try {
             UploadResult uploadResult = upload.waitForUploadResult();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // ¹Ø±Õ TransferManger
+        // ï¿½Ø±ï¿½ TransferManger
         transferManager.shutdownNow();
     }
 
     /**
-     * Òì²½ÏÂÔØÎÄ¼ş
+     * ï¿½ì²½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
      *
-     * @param file ÏÂÔØµÄÎÄ¼ş
-     * @param key  ·şÎñÆ÷ÎÄ¼şÂ·¾¶
+     * @param file ï¿½ï¿½ï¿½Øµï¿½ï¿½Ä¼ï¿½
+     * @param key  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
      */
     public static void download(File file, String key) {
         createClient();
-        // ´«ÈëÒ»¸öthreadpool, Èô²»´«ÈëÏß³Ì³Ø, Ä¬ÈÏTransferManagerÖĞ»áÉú³ÉÒ»¸öµ¥Ïß³ÌµÄÏß³Ì³Ø¡£
+        // ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½threadpool, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì³ï¿½, Ä¬ï¿½ï¿½TransferManagerï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ß³Ì³Ø¡ï¿½
         TransferManager transferManager = new TransferManager(cosClient, threadPool);
         GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, key);
-        // ÏÂÔØÎÄ¼ş
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
         Download download = transferManager.download(getObjectRequest, file);
-        // µÈ´ı´«Êä½áÊø£¨Èç¹ûÏëÍ¬²½µÄµÈ´ıÉÏ´«½áÊø£¬Ôòµ÷ÓÃ waitForCompletion£©
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ÄµÈ´ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ waitForCompletionï¿½ï¿½
         try {
             download.waitForCompletion();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // ¹Ø±Õ TransferManger
+        // ï¿½Ø±ï¿½ TransferManger
         transferManager.shutdownNow();
     }
 
     /**
-     * Ê¹ÓÃÁ÷ÏÂÔØÎÄ±¾ÎÄ¼ş
+     * Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½
      *
-     * @param txtPath ÎÄ¼şÃû³Æ
-     * @return ÎÄ±¾ÄÚÈİ
-     * @ÊéÃûÃüÃû¸ñÊ½ ÊéÃû_×÷ÕßÃû_ÕÂ½Ú±àºÅ
+     * @param txtPath ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @return ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
+     * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½Â½Ú±ï¿½ï¿½
      */
-    public String getObject(String txtPath) {
+    public static String getObject(String txtPath) {
+        createClient();
         String str = null;
         try {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, txtPath);
@@ -178,8 +184,8 @@ public class TencentCOS {
             str = inputStreamToString(cosObjectInput, "GBK");
             cosObjectInput.close();
         } catch (CosServiceException cse) {
-            //String msg = "ÎÄ¼ş" + txtPath + "²»´æÔÚ";
-            //log.error(msg + "-" + cse);
+            String msg = "ï¿½Ä¼ï¿½" + txtPath + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+            log.error(msg + "-" + cse);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -187,7 +193,7 @@ public class TencentCOS {
     }
 
     /**
-     * ÒÀ¾İ±àÂë×ª»»Á÷Îª×Ö·û´®
+     * ï¿½ï¿½ï¿½İ±ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Îªï¿½Ö·ï¿½ï¿½ï¿½
      *
      * @param is
      * @param encoding

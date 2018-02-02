@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>常春藤阅读</title>
+    <title>${title}</title>
     <link rel="stylesheet" href="${request.contextPath}/bootstrap-3.3.4-dist/css/bootstrap.css">
     <script src="${request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
     <script src="${request.contextPath}/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
@@ -33,6 +33,29 @@
             </div>
         </div>
     </nav>
+
+    <div class="content">
+        <div class="chapterName">
+        ${book.chapterName}
+        </div>
+        ${book.content}<br>
+        <div class="chapterBottom">
+            <a href="http://www.baidu.com">${book.prevChapterName!}</a>
+            <a href="http://www.baidu.com">${book.nextChapterName!}</a>
+        </div>
+    </div>
 </body>
 
 </html>
+<style>
+    .content{
+        margin-top: 50px;
+    }
+    .chapterName{
+        text-align: center;
+        font-size: 30px;
+    }
+    .chapterBottom{
+        text-align: right;
+    }
+</style>
