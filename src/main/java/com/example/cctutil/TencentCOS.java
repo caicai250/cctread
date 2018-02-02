@@ -26,7 +26,7 @@ import java.util.concurrent.Executors;
  *
  * @updateRemark 修改java文件编码为UTF-8，原GBK编码汉字无法转换
  * @author caic
- * @version 1.0 ����ʱ�䣺2018-01-26 13:59
+ * @version 2.0 ����ʱ�䣺2018-01-26 13:59
  */
 public class TencentCOS {
 
