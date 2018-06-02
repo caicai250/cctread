@@ -1,0 +1,65 @@
+#home-container {
+
+}
+#home-container .container {
+     /*width: 100%;*/
+     /*padding: 0px;*/
+     /*margin: 0px;*/
+ }
+
+.index-logo {
+    height: 100%;
+    margin-left: 10px;
+}
+
+#home-container .navbar-nav li a:hover{
+    color: #e693a2;
+}
+#home-container .navbar-nav li a:focus {
+    color: #e693a2;
+}
+#home-container .navbar-nav li span:hover {
+    color: #e693a2;
+}
+#home-container .search-container {
+    margin-top: 50px;
+}
+#home-container .search-container .input-group {
+    margin-top: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+}
+#home-container .search-container .input-group .btn-default {
+    padding: 0px;
+    line-height: 0px;
+    background-color : #eee;
+    border-color: #eee;
+}
+#home-container .search-container .author-button {
+    float: right;
+    margin-top: 15px;
+    color: #fff;
+    background: #c7d8d7;
+    border-color: #84aebb;
+}
+#home-container .search-container .author-button:hover {
+    color: #84aebb;
+}
+#home-container .search-container .author-button:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+#home-container .book-style-contaoner ul li a{
+    color: #000;
+    font-size: 16px;
+}
+#home-container .book-style-contaoner ul li a:hover {
+    background-color: #fff;
+    color: #84aebb
+}
+#home-container .img-container img{
+    width:65%;
+}
+
+
+
