@@ -57,8 +57,13 @@
     background-color: #fff;
     color: #84aebb
 }
+#home-container .img-container #myCarousel {
+    width: 65%;
+}
 #home-container .img-container img{
-    width:65%;
+    width:100%;
+    height: 400px;
+    padding: 0;
 }
 
 

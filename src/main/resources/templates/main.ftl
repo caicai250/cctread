@@ -66,7 +66,40 @@
                 </ul>
             </div>
             <div class="container img-container">
-                <a href="#" class="navbar-brand" style="padding:0;"><img  src="${request.contextPath}/image/zly1.jpg"></a>
+                <div id="myCarousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"> </li>
+                        <li data-target="#myCarousel" data-slide-to="1"> </li>
+                        <li data-target="#myCarousel" data-slide-to="2"> </li>
+                        <li data-target="#myCarousel" data-slide-to="3"> </li>
+                        <li data-target="#myCarousel" data-slide-to="4"> </li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="${request.contextPath}/image/zly1.jpg" alt="第一张" />
+                        </div>
+                        <div class="item">
+                            <img src="${request.contextPath}/image/zly2.jpg" alt="第二张" />
+                        </div>
+                        <div class="item">
+                            <img src="${request.contextPath}/image/zly3.jpg" alt="第三张" />
+                        </div>
+                        <div class="item">
+                            <img src="${request.contextPath}/image/zly4.jpg" alt="第四张" />
+                        </div>
+                        <div class="item">
+                            <img src="${request.contextPath}/image/zly5.jpg" alt="第五张" />
+                        </div>
+
+                    </div>
+                    <a href="#myCarousel" data-slide="prev" class="carousel-control left">
+                        <span class="glyphicon glyphicon-chevron-left"> </span>
+                    </a>
+                    <a href="#myCarousel" data-slide="next" class="carousel-control right">
+                        <span class="glyphicon glyphicon-chevron-right"> </span>
+                    </a>
+                </div>
             </div>
 
             <#--<div class="content">-->
@@ -96,3 +129,14 @@
         <#--text-align: right;-->
     <#--}-->
 <#--</style>-->
+<script type="text/javascript">
+
+
+
+    //自动播放
+    $("#myCarousel").carousel({
+        interval :3000,
+    });
+
+
+</script>
