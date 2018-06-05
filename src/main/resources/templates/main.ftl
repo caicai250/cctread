@@ -3,11 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>${title}</title>
-    <link rel="stylesheet" href="${request.contextPath}/bootstrap-3.3.4-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/index.css">
-    <script src="${request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
-    <script src="${request.contextPath}/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
-    <script src="${request.contextPath}/bootstrap-3.3.4-dist/js/popper.min.js"></script>
+    <script src="${request.contextPath}/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="${request.contextPath}/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
 </head>
     <body>
