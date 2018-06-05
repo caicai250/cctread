@@ -59,11 +59,58 @@
 }
 #home-container .img-container #myCarousel {
     width: 65%;
+    float:left;
 }
 #home-container .img-container img{
     width:100%;
     height: 400px;
     padding: 0;
+}
+#home-container .title-container {
+    width:32%;
+    float: right;
+}
+#home-container .title-container img {
+    height: 200px;
+}
+#home-container .title-container ul {
+    padding:0;
+}
+#home-container .title-container ul li {
+    list-style: none;
+    height: 30px;
+    margin: 6px;
+}
+#home-container .recommend-container {
+    margin-top: 20px;
+}
+#home-container .recommend-container .book-type-name {
+    width:25%;
+    float: left;
+    padding-right: 1%;
+}
+#home-container .recommend-container .book-type-name .model-name {
+    height: 25px;
+    border-bottom: 1px #84aebb solid;
+}
+#home-container .recommend-container .book-type-name p{
+    font-size: 18px;
+    font-weight: normal;
+    font-family: "Microsoft YaHei", 微软雅黑, SimSun, tahoma, arial;
+}
+#home-container .recommend-container .book-type-name ul {
+    padding: 0;
+}
+#home-container .recommend-container .book-type-name ul li {
+    list-style: none;
+    height: 32px;
+    padding-top: 8px;
+}
+#home-container .recommend-container .book-type-name ul li a {
+    color: #000;
+}
+#home-container .recommend-container .book-type-name ul li a:hover {
+    color: #84aebb;
 }
 
 
