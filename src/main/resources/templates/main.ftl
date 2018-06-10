@@ -8,6 +8,7 @@
     <script src="${request.contextPath}/jquery/jquery-3.3.1.min.js"></script>
     <script src="${request.contextPath}/bootstrap-3.3.4-dist/js/bootstrap.js"></script>
     <script src="${request.contextPath}/bootstrap-3.3.4-dist/js/popper.min.js"></script>
+    <#import "/main-macro.ftl" as main>
 
 </head>
     <body>
@@ -112,116 +113,30 @@
 
                 </div>
 
-                <div class="container ad-container">
-                    <a href="#"><img class="index-logo" src="${request.contextPath}/image/ad.jpg" alt="${title}"></a>
-                </div>
-
-                <#--排行榜-->
-                <#--<div class="container ranking-list-container">-->
-                    <#--<button class="btn btn-sm">男生</button>-->
-                    <#--<button class="btn btn-sm">女生</button>-->
-                    <#--<button class="btn btn-sm">全站</button>-->
-                <#--</div>-->
+                <@main.advert advertPath=request.contextPath+"/image/ad.jpg" />
 
                 <div class="container recommend-container">
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
+                    <@main.bookType bookTypeName="古代言情" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="现代言情" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="玄幻言情" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="浪漫青春" romanceList=modernRomanceList />
                 </div>
+                <div class="container recommend-container">
+                    <@main.bookType bookTypeName="悬疑灵异" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="科幻游戏" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="改编频道" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="更多作品" romanceList=modernRomanceList />
+                </div>
+
+                <@main.advert advertPath=request.contextPath+"/image/ad2.jpg" />
 
                 <div class="container recommend-container">
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
-                    <div class="book-type-name">
-                        <div class="model-name">
-                            <p>现代言情</p>
-                        </div>
-                        <ul>
-                            <#list modernRomanceList as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
-                            </#list>
-                        </ul>
-                    </div>
+                    <@main.rankData title="收藏榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="月票" />
+                    <@main.rankData title="收藏榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=false unit="" />
+                    <@main.rankData title="点赞榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="点赞数" />
+                    <@main.rankData title="下载榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="下载数" />
                 </div>
 
-
-                <#--<div class="content">-->
-                    <#--<div class="chapterName">-->
-                    <#--${book.chapterName}-->
-                    <#--</div>-->
-                <#--${book.content}<br>-->
-                    <#--<div class="chapterBottom">-->
-                        <#--<a href="http://www.baidu.com">${book.prevChapterName!}</a>-->
-                        <#--<a href="http://www.baidu.com">${book.nextChapterName!}</a>-->
-                    <#--</div>-->
-                <#--</div>-->
             </div>
 
     </body>

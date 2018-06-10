@@ -24,9 +24,12 @@ public class MainController {
         List tilteMenu = getTitleMenu();
         //现代言情列表
         List modernRomanceList = getModernRomanceList();
+        //收藏榜
+        List collectionList = getCollectList();
         model.addAttribute("listMuen", listMenu);
         model.addAttribute("titleMenu", tilteMenu);
         model.addAttribute("modernRomanceList", modernRomanceList);
+        model.addAttribute("collectionList", collectionList);
         model.addAttribute("title", "常春藤阅读");
 
 
@@ -106,5 +109,34 @@ public class MainController {
             modernRomanceList.add(map);
         }
         return modernRomanceList;
+    }
+
+    public List<Map<String,String>> getCollectList() {
+        List<Map<String,String>> collectionList = new ArrayList<>();
+        ArrayList  arrMenu = new ArrayList();
+        arrMenu.add("军爷压榨：赚钱能手小萌妻");
+        arrMenu.add("婚后追妻：顾少，求放过");
+        arrMenu.add("重生之嫡女裳华");
+        arrMenu.add("顾小姐，余生请多关照");
+        arrMenu.add("一生一世笑皇途");
+        arrMenu.add("天降萌妻：宫爷揽入怀");
+        arrMenu.add("第一宠婚：军爷的头号新妻");
+        arrMenu.add("权倾天下之将门冷后");
+        arrMenu.add("名门隐婚：枭爷娇宠妻");
+        arrMenu.add("前妻归来：邵医生好久不见");
+        int size = arrMenu.size();
+        for(int i=0; i<size; i++) {
+            Map<String, String> map = new HashMap<>();
+            String key = "" + i;
+            String value = arrMenu.get(i).toString();
+            String count= "" + (size-i)*100;
+            String author= "作者"+ (i+1);
+            map.put("key",key);
+            map.put("value",value);
+            map.put("count",count);
+            map.put("author",author);
+            collectionList.add(map);
+        }
+        return collectionList;
     }
 }
