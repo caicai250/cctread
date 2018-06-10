@@ -1,4 +1,4 @@
-package com.example.cctread.webcontroller;
+package com.example.cctread.controller;
 
 import com.example.cctutil.cos.TencentCOS;
 import com.example.entity.vo.Book;
@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
