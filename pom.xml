@@ -76,12 +76,6 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<!--dbcp连接池驱动-->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-		</dependency>
-
 		<!--webjars-->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -135,7 +129,7 @@
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.2</version>
 				<configuration>
-					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<configurationFile>src/main/resources/mybatis/generatorConfig.xml</configurationFile>
 					<overwrite>true</overwrite>
 					<verbose>true</verbose>
 				</configuration>
