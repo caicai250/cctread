@@ -3,10 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>${title}</title>
-    <link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="${request.contextPath}/css/index.css">
-    <script src="${request.contextPath}/webjars/jquery/3.3.1-1/jquery.min.js"></script>
-    <script src="${request.contextPath}/webjars/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <#--<script src="${request.contextPath}/webjars/popper.js/1.14.1/popper.js"></script>-->
      <#import "/main-macro.ftl" as main>
 
 </head>
@@ -141,7 +141,8 @@
     </body>
 
 </html>
-
+    <script src="${request.contextPath}/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="${request.contextPath}/webjars/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 
