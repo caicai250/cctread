@@ -24,7 +24,7 @@
                         <div class="collapse navbar-collapse" id="navbar-collapse">
                             <ul class="nav navbar-nav" style="margin-top:0">
                             <#list listMuen as em>
-                                <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
+                                <li ><a href="javascript:alert(${em.codeProice});">${em.codeName}</a></li>
                             </#list>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
@@ -61,7 +61,7 @@
                             <a href="javascriptLalert(0)">全部作品</a>
                         </li>
                         <#list listMuen as em>
-                            <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
+                            <li ><a href="javascript:alert(${em.codeProice});">${em.codeName}</a></li>
                         </#list>
                     </ul>
                 </div>

@@ -1,7 +1,10 @@
 package com.example.cctread.controller;
 
+import com.example.cctread.domain.Code;
+import com.example.cctread.serviece.CodeService;
 import com.example.cctutil.cos.TencentCOS;
 import com.example.entity.vo.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +17,19 @@ import java.util.Map;
 @Controller
 public class MainController {
 
+    @Autowired
+    private CodeService codeService;
+
     @RequestMapping(value = "/main")
     public String index(ModelMap model) {
-        //书籍类型
-        List listMenu = getListMenu();
         //头条列表
         List tilteMenu = getTitleMenu();
         //现代言情列表
         List modernRomanceList = getModernRomanceList();
         //收藏榜
         List collectionList = getCollectList();
-        model.addAttribute("listMuen", listMenu);
+        //书籍类型
+        model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
         model.addAttribute("titleMenu", tilteMenu);
         model.addAttribute("modernRomanceList", modernRomanceList);
         model.addAttribute("collectionList", collectionList);
@@ -44,27 +49,6 @@ public class MainController {
         return "main";//返回的内容就是templetes下面文件的名称
     }
 
-    public List<Map<String,String>> getListMenu() {
-        List<Map<String,String>> listMenu = new ArrayList<>();
-        ArrayList  arrMenu = new ArrayList();
-        arrMenu.add("古代言情");
-        arrMenu.add("现代言情");
-        arrMenu.add("玄幻仙侠");
-        arrMenu.add("浪漫青春");
-        arrMenu.add("悬疑灵异");
-        arrMenu.add("改编频道");
-        int size = arrMenu.size();
-        for(int i=0; i<size; i++) {
-            Map<String, String> map = new HashMap<>();
-            String key = "" + i;
-            String value = arrMenu.get(i).toString();
-            map.put("key",key);
-            map.put("value",value);
-            listMenu.add(map);
-        }
-        return listMenu;
-    }
-
     public List<Map<String,String>> getTitleMenu() {
         List<Map<String,String>> titleMenu = new ArrayList<>();
         ArrayList  arrMenu = new ArrayList();
@@ -74,13 +58,10 @@ public class MainController {
         arrMenu.add("4.如何抹去你身影，如同忘却我姓名");
         arrMenu.add("5.说什么王权富贵，怕什么戒律清规");
         arrMenu.add("6.心恋我百转千回，快带我远走高飞");
-        int size = arrMenu.size();
-        for(int i=0; i<size; i++) {
+        for(int i=0; i<arrMenu.size(); i++) {
             Map<String, String> map = new HashMap<>();
-            String key = "" + i;
-            String value = arrMenu.get(i).toString();
-            map.put("key",key);
-            map.put("value",value);
+            map.put("key","" + i);
+            map.put("value",arrMenu.get(i).toString());
             titleMenu.add(map);
         }
         return titleMenu;
@@ -93,6 +74,16 @@ public class MainController {
         arrMenu.add("娱乐圈之贵后来袭");
         arrMenu.add("妻约婚色之赖上俏前妻");
         arrMenu.add("皇后驾到之盛宠豪门");
+        arrMenu.add("墨少，您的萌妻好甜");
+        arrMenu.add("豪门主母");
+        arrMenu.add("重生之王者归来");
+        arrMenu.add("枕上暖婚");
+
+        arrMenu.add("墨少，您的是说萌妻好甜");
+        arrMenu.add("豪门主母是是是");
+        arrMenu.add("重生之王是是是者归来");
+        arrMenu.add("枕上暖婚");
+
         arrMenu.add("墨少，您的萌妻好甜");
         arrMenu.add("豪门主母");
         arrMenu.add("重生之王者归来");
