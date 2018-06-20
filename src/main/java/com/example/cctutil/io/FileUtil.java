@@ -1,0 +1,73 @@
+package com.example.cctutil.io;
+
+import java.io.*;
+
+/**
+ * @Auther: caic
+ * @Date: 2018/6/20 16:03
+ * @Description: 文件操作辅助类
+ * @Version: 1.0
+ */
+public class FileUtil {
+    /**
+     * 读取书籍指定某行到某行
+     *
+     * @param bookpath    书籍文件路径
+     * @param startNumber 开始行号
+     * @param endNumber   结束行号
+     * @return String
+     */
+    public static String readBood(String bookpath, int startNumber, int endNumber) {
+        LineNumberReader reader = null;
+        InputStreamReader isr = null;
+        FileReader fileReader = null;
+        FileInputStream fileInputStream = null;
+        StringBuilder txt = new StringBuilder();
+        try {
+            File file = new File(bookpath);//文件路径
+            fileInputStream = new FileInputStream(file);
+            byte[] b = new byte[3];
+            fileInputStream.read(b);
+            if (b[0] == -17 && b[1] == -69 && b[2] == -65) {//编码为UTF-8，linux环境默认编码是UTF-8
+                fileReader = new FileReader(file);
+                reader = new LineNumberReader(fileReader);
+            } else {//编码可能为GBK，windows环境默认编码是GBK
+                isr = new InputStreamReader(new FileInputStream(file), "GBK");
+                reader = new LineNumberReader(isr);
+            }
+            for (int i = 1; i <= endNumber; i++) {
+                if (i < startNumber) {
+                    reader.readLine();
+                } else {
+                    txt.append(reader.readLine());
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (fileInputStream != null) {
+                    fileInputStream.close();
+                }
+                if (fileReader != null) {
+                    fileReader.close();
+                }
+                if (isr != null) {
+                    isr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return txt.toString();
+    }
+
+    public static void main(String[] args) {
+        String text = readBood("D:/dpcq_jjb.txt", 6, 7);
+        System.out.println(text);
+    }
+}

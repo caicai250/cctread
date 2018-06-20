@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="${request.contextPath}/css/index.css">
 
     <#--<script src="${request.contextPath}/webjars/popper.js/1.14.1/popper.js"></script>-->
-     <#import "/main-macro.ftl" as main>
+     <#import "main-macro.ftl" as main>
 
 </head>
     <body>
