@@ -78,16 +78,6 @@ public class MainController {
         arrMenu.add("豪门主母");
         arrMenu.add("重生之王者归来");
         arrMenu.add("枕上暖婚");
-
-        arrMenu.add("墨少，您的是说萌妻好甜");
-        arrMenu.add("豪门主母是是是");
-        arrMenu.add("重生之王是是是者归来");
-        arrMenu.add("枕上暖婚");
-
-        arrMenu.add("墨少，您的萌妻好甜");
-        arrMenu.add("豪门主母");
-        arrMenu.add("重生之王者归来");
-        arrMenu.add("枕上暖婚");
         int size = arrMenu.size();
         for(int i=0; i<size; i++) {
             Map<String, String> map = new HashMap<>();

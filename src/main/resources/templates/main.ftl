@@ -115,6 +115,61 @@
                 <@main.advert advertPath=request.contextPath+"/image/ad.jpg" />
 
                 <div class="container recommend-container">
+                    <@main.rankData title="排行榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
+
+                    <div id="myCarousel1" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"> </li>
+                            <li data-target="#myCarousel" data-slide-to="1"> </li>
+                            <li data-target="#myCarousel" data-slide-to="2"> </li>
+                            <li data-target="#myCarousel" data-slide-to="3"> </li>
+                            <li data-target="#myCarousel" data-slide-to="4"> </li>
+                            <li data-target="#myCarousel" data-slide-to="5"> </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item1">
+                                <img src="${request.contextPath}/image/ad5.jpg" alt="第一张" />
+                            </div>
+                            <div class="item2">
+                                <img src="${request.contextPath}/image/ad6.jpg" alt="第二张" />
+                            </div>
+                            <div class="item3">
+                                <img src="${request.contextPath}/image/ad7.jpg" alt="第三张" />
+                            </div>
+                            <div class="item4">
+                                <img src="${request.contextPath}/image/ad8.jpg" alt="第四张" />
+                            </div>
+                            <div class="item5">
+                                <img src="${request.contextPath}/image/ad9.jpg" alt="第五张" />
+                            </div>
+                            <div class="item6">
+                                <img src="${request.contextPath}/image/ad10.jpg" alt="第六张" />
+                            </div>
+
+                        </div>
+                        <a href="#myCarousel" data-slide="prev" class="carousel-control left">
+                            <span class="glyphicon glyphicon-chevron-left"> </span>
+                        </a>
+                        <a href="#myCarousel" data-slide="next" class="carousel-control right">
+                            <span class="glyphicon glyphicon-chevron-right"> </span>
+                        </a>
+
+                        <div class="description">
+                            <div class="book-detail" style="position: absolute; top: 0px; left: 0px; display: block;">
+                                <h4><a href="/info/396952.html" target="_blank">女人不狠，地位不稳</a></h4>
+                                <p>【一部女王崛起史，复仇，商战，职场】四年前，风靡全城的沈家千金，陆氏少夫人锒铛入狱。身为丈夫的他不仅不闻不问，还让律师送来了离婚协议和孩子的抚养协议。留下一句：“从一开始，我爱的就不是你。”出狱后，面对周...</p>
+                                <a class="btn-read" href="/info/396952.html" target="_blank">立即阅读</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <@main.rankData title="本周推荐" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
+                </div>
+
+                <@main.advert advertPath=request.contextPath+"/image/ad4.jpg" />
+
+                <div class="container recommend-container">
                     <@main.bookType bookTypeName="古代言情" romanceList=modernRomanceList />
                     <@main.bookType bookTypeName="现代言情" romanceList=modernRomanceList />
                     <@main.bookType bookTypeName="玄幻言情" romanceList=modernRomanceList />
@@ -150,6 +205,9 @@
     $("#myCarousel").carousel({
         interval :3000,
     });
+    // $("#myCarousel1").carousel({
+    //     interval :3000,
+    // });
 
 
 </script>
