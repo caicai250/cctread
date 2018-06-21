@@ -17,7 +17,7 @@ public class CctNovel {
     private String novelState;
     private Date startDate;
     private Date updateDate;
-    private Blob novelCover;
+    private byte[] novelCover;
     private String isCharge;
     private int bookLike;
     private String intro;
@@ -78,11 +78,11 @@ public class CctNovel {
         this.updateDate = updateDate;
     }
 
-    public Blob getNovelCover() {
+    public byte[] getNovelCover() {
         return novelCover;
     }
 
-    public void setNovelCover(Blob novelCover) {
+    public void setNovelCover(byte[] novelCover) {
         this.novelCover = novelCover;
     }
 

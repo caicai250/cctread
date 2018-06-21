@@ -12,14 +12,14 @@
         <result column="novel_state" property="novelState"/>
         <result column="start_date" property="startDate"/>
         <result column="update_date" property="updateDate"/>
-        <result column="novel_cover" property="novelCover"/>
+        <result column="novel_cover" property="novelCover" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
         <result column="ischarge" property="isCharge"/>
         <result column="book_like" property="bookLike"/>
         <result column="intro" property="intro"/>
     </resultMap>
 
-    <insert id="saveNovel"  parameterType="com.example.cctread.domain.CctNovel" useGeneratedKeys="true"  keyProperty="id">
+    <insert id="saveNovel"  parameterType="com.example.cctread.domain.CctNovel" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO cct_novel (novel_title, novel_type, author, novel_state, start_date, update_date, novel_cover, ischarge, book_like, intro)
-        VALUES (#{novelTitle},#{novelType},#{author},#{novelState},#{startDate},#{updateDate},#{novelCover},#{isCharge},#{bookLike},#{intro});
+        VALUES (#{novelTitle},#{novelType},#{author},#{novelState},#{startDate},#{updateDate},#{novelCover,},#{isCharge},#{bookLike},#{intro});
     </insert>
 </mapper>
