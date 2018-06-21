@@ -87,11 +87,11 @@
     select 
     <include refid="Base_Column_List" />
     from cct_chapter
-    where chapterid = #{chapterid,jdbcType=INTEGER}
+    where chapter_id = #{chapterid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cct_chapter
-    where chapterid = #{chapterid,jdbcType=INTEGER}
+    where chapter_id = #{chapterid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.entity.CctChapterExample" >
     delete from cct_chapter
@@ -100,8 +100,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.entity.CctChapter" >
-    insert into cct_chapter (chapterid, novelid, chaptername, 
-      synopsis, updatedate)
+    insert into cct_chapter (chapter_id, novel_id, chapter_name,
+      synopsis, update_date)
     values (#{chapterid,jdbcType=INTEGER}, #{novelid,jdbcType=INTEGER}, #{chaptername,jdbcType=VARCHAR}, 
       #{synopsis,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
   </insert>
@@ -173,11 +173,11 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update cct_chapter
-    set chapterid = #{record.chapterid,jdbcType=INTEGER},
-      novelid = #{record.novelid,jdbcType=INTEGER},
-      chaptername = #{record.chaptername,jdbcType=VARCHAR},
+    set chapter_id = #{record.chapterid,jdbcType=INTEGER},
+      novel_id = #{record.novelid,jdbcType=INTEGER},
+      chapter_name = #{record.chaptername,jdbcType=VARCHAR},
       synopsis = #{record.synopsis,jdbcType=VARCHAR},
-      updatedate = #{record.updatedate,jdbcType=TIMESTAMP}
+      update_date = #{record.updatedate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -202,10 +202,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.entity.CctChapter" >
     update cct_chapter
-    set novelid = #{novelid,jdbcType=INTEGER},
-      chaptername = #{chaptername,jdbcType=VARCHAR},
+    set novel_id = #{novelid,jdbcType=INTEGER},
+      chapter_name = #{chaptername,jdbcType=VARCHAR},
       synopsis = #{synopsis,jdbcType=VARCHAR},
-      updatedate = #{updatedate,jdbcType=TIMESTAMP}
-    where chapterid = #{chapterid,jdbcType=INTEGER}
+      update_date = #{updatedate,jdbcType=TIMESTAMP}
+    where chapter_id = #{chapterid,jdbcType=INTEGER}
   </update>
 </mapper>

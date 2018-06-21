@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @Auther: caic
  * @Date: 2018/6/12 19:13
- * @Description:
+ * @Description: 系统编码表操作
  * @Version: 1.0
  */
 public interface CodeMapper {
