@@ -118,7 +118,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cct_novel
-    where novelid = #{novelid,jdbcType=INTEGER}
+    where novel_id = #{novelid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.entity.CctNovelExample" >
     delete from cct_novel
@@ -127,9 +127,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.example.entity.CctNovel" >
-    insert into cct_novel (novelid, title, noveltype, 
-      author, novelstate, startdate, 
-      updatedate, ischarge, nocalcover
+    insert into cct_novel (novel_id, novel_title, novel_type,
+      author, novel_state, start_date,
+      update_date, ischarge, novel_cover
       )
     values (#{novelid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{noveltype,jdbcType=CHAR}, 
       #{author,jdbcType=VARCHAR}, #{novelstate,jdbcType=CHAR}, #{startdate,jdbcType=DATE}, 
@@ -240,28 +240,28 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map" >
     update cct_novel
-    set novelid = #{record.novelid,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      noveltype = #{record.noveltype,jdbcType=CHAR},
+    set novel_id = #{record.novelid,jdbcType=INTEGER},
+      novel_title = #{record.title,jdbcType=VARCHAR},
+      novel_type = #{record.noveltype,jdbcType=CHAR},
       author = #{record.author,jdbcType=VARCHAR},
-      novelstate = #{record.novelstate,jdbcType=CHAR},
-      startdate = #{record.startdate,jdbcType=DATE},
-      updatedate = #{record.updatedate,jdbcType=DATE},
+      novel_state = #{record.novelstate,jdbcType=CHAR},
+      start_date = #{record.startdate,jdbcType=DATE},
+      update_date = #{record.updatedate,jdbcType=DATE},
       ischarge = #{record.ischarge,jdbcType=CHAR},
-      nocalcover = #{record.nocalcover,jdbcType=LONGVARBINARY}
+      novel_cover = #{record.nocalcover,jdbcType=LONGVARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
     update cct_novel
-    set novelid = #{record.novelid,jdbcType=INTEGER},
-      title = #{record.title,jdbcType=VARCHAR},
-      noveltype = #{record.noveltype,jdbcType=CHAR},
+    set novel_id = #{record.novelid,jdbcType=INTEGER},
+      novel_title = #{record.title,jdbcType=VARCHAR},
+      novel_type = #{record.noveltype,jdbcType=CHAR},
       author = #{record.author,jdbcType=VARCHAR},
-      novelstate = #{record.novelstate,jdbcType=CHAR},
-      startdate = #{record.startdate,jdbcType=DATE},
-      updatedate = #{record.updatedate,jdbcType=DATE},
+      novel_state = #{record.novelstate,jdbcType=CHAR},
+      start_date = #{record.startdate,jdbcType=DATE},
+      update_date = #{record.updatedate,jdbcType=DATE},
       ischarge = #{record.ischarge,jdbcType=CHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -299,25 +299,25 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.entity.CctNovel" >
     update cct_novel
-    set title = #{title,jdbcType=VARCHAR},
-      noveltype = #{noveltype,jdbcType=CHAR},
+    set novel_title = #{title,jdbcType=VARCHAR},
+      novel_type = #{noveltype,jdbcType=CHAR},
       author = #{author,jdbcType=VARCHAR},
-      novelstate = #{novelstate,jdbcType=CHAR},
-      startdate = #{startdate,jdbcType=DATE},
-      updatedate = #{updatedate,jdbcType=DATE},
+      novel_state = #{novelstate,jdbcType=CHAR},
+      start_date = #{startdate,jdbcType=DATE},
+      update_date = #{updatedate,jdbcType=DATE},
       ischarge = #{ischarge,jdbcType=CHAR},
-      nocalcover = #{nocalcover,jdbcType=LONGVARBINARY}
-    where novelid = #{novelid,jdbcType=INTEGER}
+      novel_cover = #{nocalcover,jdbcType=LONGVARBINARY}
+    where novel_id = #{novelid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.entity.CctNovel" >
     update cct_novel
-    set title = #{title,jdbcType=VARCHAR},
-      noveltype = #{noveltype,jdbcType=CHAR},
+    set novel_title = #{title,jdbcType=VARCHAR},
+      novel_type = #{noveltype,jdbcType=CHAR},
       author = #{author,jdbcType=VARCHAR},
-      novelstate = #{novelstate,jdbcType=CHAR},
-      startdate = #{startdate,jdbcType=DATE},
-      updatedate = #{updatedate,jdbcType=DATE},
+      novel_state = #{novelstate,jdbcType=CHAR},
+      start_date = #{startdate,jdbcType=DATE},
+      update_date = #{updatedate,jdbcType=DATE},
       ischarge = #{ischarge,jdbcType=CHAR}
-    where novelid = #{novelid,jdbcType=INTEGER}
+    where novel_id = #{novelid,jdbcType=INTEGER}
   </update>
 </mapper>

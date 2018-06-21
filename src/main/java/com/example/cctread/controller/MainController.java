@@ -1,7 +1,6 @@
 package com.example.cctread.controller;
 
-import com.example.cctread.domain.Code;
-import com.example.cctread.serviece.CodeService;
+import com.example.cctread.service.CodeService;
 import com.example.cctutil.cos.TencentCOS;
 import com.example.entity.vo.Book;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.cctread.serviece;
+package com.example.cctread.service;
 
 import com.example.cctread.domain.Code;
 

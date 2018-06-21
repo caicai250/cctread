@@ -1,7 +1,7 @@
 package com.example.cctread.controller;
 
 import com.example.cctread.domain.Code;
-import com.example.cctread.serviece.CodeService;
+import com.example.cctread.service.CodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
