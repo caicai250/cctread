@@ -243,58 +243,54 @@
     text-decoration: none;
 }
 
-#myCarousel1 {
+#home-container .recommend-container .editor-recommend {
     width: 50%;
-    padding-right: 3%;
     float: left;
+    padding-right: 3%;
 }
-#myCarousel1 img {
-    width: 90px;
-    height: 125px;
+#home-container .recommend-container .editor-recommend .model-name {
+    height: 25px;
+    border-bottom: 1px #84aebb solid;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei", 微软雅黑, SimSun, tahoma, arial;
 }
-#myCarousel1 .carousel-control {
-    background-image: none !important;
+#home-container .recommend-container .editor-recommend .editor-container {
+    position: relative;
+    margin-top: 1%;
 }
-#myCarousel1 .carousel-control a {
-    top: 55%;
-    font-size: 18px;
+#home-container .recommend-container .editor-recommend .editor-img img {
+    width: 19%;
 }
-#myCarousel1 .carousel-inner {
-    width: 40%;
-}
-#myCarousel1 .carousel-inner item2 {
-     left: 3%;
-     top: 7px;
- }
-#myCarousel1 .carousel-inner item2 img {
-    width: 75px;
-    height: 110px;
-}
-#myCarousel1 .description {
+.editor-recommend .description {
     position: absolute;
     top: 0;
-    left: 40%;
-    width: 55%;
+    left: 28%;
+    width: 66%;
 }
-#myCarousel1 .description .book-detail .h4 a {
+.editor-recommend .description .book-detail .h4 {
+    font-size: 14px;
+}
+.editor-recommend .description .book-detail .h4 a {
     color:  #84aebb;
 }
-#myCarousel1 .description p {
+.editor-recommend .description p {
     zoom: 1;
-    line-height: 24px;
-    height: 96px;
-    margin-bottom: 16px;
+    line-height: 20px;
+    height: 57px;
+    margin-bottom: 10px;
     color: #666;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
 }
-#myCarousel1 .btn-read {
+.editor-recommend .btn-read {
     display: inline-block;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
+    width: 80px;
+    height: 25px;
+    line-height: 25px;
     text-align: center;
     color: #fff;
     border-radius: 15px;
