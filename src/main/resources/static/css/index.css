@@ -85,7 +85,7 @@
     margin-top: 20px;
 }
 #home-container .recommend-container .book-type-name {
-    width:25%;
+    width: 18%;
     float: left;
     padding-right: 1%;
 }
@@ -103,7 +103,7 @@
 }
 #home-container .recommend-container .book-type-name ul li {
     list-style: none;
-    height: 32px;
+    height: 34px;
     padding-top: 8px;
 }
 #home-container .recommend-container .book-type-name ul li a {
@@ -269,6 +269,12 @@
     left: 28%;
     width: 66%;
 }
+.editor-recommend .description .book-detail {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: block;
+}
 .editor-recommend .description .book-detail .h4 {
     font-size: 14px;
 }
@@ -283,7 +289,7 @@
     color: #666;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     overflow: hidden;
 }
 .editor-recommend .btn-read {
@@ -297,6 +303,55 @@
     background-color: #84aebb;
 }
 
-
-
-
+#home-container .recommend-container .classify-article #myCarousel1 img {
+    width: 445px;
+    height: 250px;
+}
+#home-container .recommend-container .classify-article #myCarousel2 img {
+    width: 445px;
+    height: 250px;
+}
+#home-container .recommend-container .classify-article {
+    width: 39%;
+    float:left;
+    margin-right: 5%;
+}
+#home-container .recommend-container .classify-article .model-name {
+    width: 100%;
+    height: 25px;
+    border-bottom: 1px #84aebb solid;
+    margin-bottom: 8px;
+}
+#home-container .recommend-container .classify-article .model-name p {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei", 微软雅黑, SimSun, tahoma, arial;
+}
+#home-container .recommend-container .classify-article .classify-book-list {
+    overflow: hidden;
+}
+#home-container .recommend-container .classify-book-list{
+    padding: 0;
+}
+#home-container .recommend-container .classify-article .classify-book-list li {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    width: 220px;
+    font-size: 14px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#home-container .recommend-container .classify-article .classify-book-list .gray {
+    color: #999;
+}
+#home-container .recommend-container .classify-article .classify-book-list a {
+    text-decoration: none;
+    color: #666;
+}
+#home-container .recommend-container .classify-article .classify-book-list a:hover {
+    color: #84aebb;
+}

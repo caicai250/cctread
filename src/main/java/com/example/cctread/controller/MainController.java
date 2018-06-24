@@ -27,11 +27,19 @@ public class MainController {
         List modernRomanceList = getModernRomanceList();
         //收藏榜
         List collectionList = getCollectList();
-        //书籍类型
+        //编辑强推
+        List editorRecommendList = getEditorRecommendList();
+        //主轮播图
+        List mainCarouselList = getMainCarouselList();
+        //分类好文
+        List classifyArticleList = getClassifyArticleList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
         model.addAttribute("titleMenu", tilteMenu);
         model.addAttribute("modernRomanceList", modernRomanceList);
         model.addAttribute("collectionList", collectionList);
+        model.addAttribute("editorRecommendList", editorRecommendList);
+        model.addAttribute("mainCarouselList", mainCarouselList);
+        model.addAttribute("classifyArticleList", classifyArticleList);
         model.addAttribute("title", "常春藤阅读");
 
 
@@ -77,6 +85,9 @@ public class MainController {
         arrMenu.add("豪门主母");
         arrMenu.add("重生之王者归来");
         arrMenu.add("枕上暖婚");
+        arrMenu.add("暖宠之国民妖精怀里来");
+        arrMenu.add("娱乐圈之贵后来袭");
+        arrMenu.add("妻约婚色之赖上俏前妻");
         int size = arrMenu.size();
         for(int i=0; i<size; i++) {
             Map<String, String> map = new HashMap<>();
@@ -116,5 +127,56 @@ public class MainController {
             collectionList.add(map);
         }
         return collectionList;
+    }
+
+    public List<Map<String,String>> getEditorRecommendList() {
+        List<Map<String,String>> editorRecommendList = new ArrayList<>();
+        ArrayList  imgArr = new ArrayList();
+        ArrayList  titleArr = new ArrayList();
+        ArrayList  detailArr = new ArrayList();
+        imgArr.add("/image/ad5.jpg");
+        imgArr.add("/image/ad6.jpg");
+        imgArr.add("/image/ad7.jpg");
+        titleArr.add("女人不狠，地位不稳");
+        titleArr.add("重生之锦绣农门");
+        titleArr.add("闲散王爷的农门妻");
+        detailArr.add("【一部女王崛起史，复仇，商战，职场】四年前，风靡全城的沈家千金，陆氏少夫人锒铛入狱。身为丈夫的他不仅不闻不问，还让律师送来了离婚协议和孩子的抚养协议。留下一句：“从一开始，我爱的就不是你。”出狱后，面对周...");
+        detailArr.add("近代绣娘----顾绣嫡传门下第九代弟子----顾明月在硝烟纷飞的战火中重返前世。前世的顾明月有一个幸福的家庭，性格憨厚的武力爆表爹，丰神俊朗的姐控弟，持家有道的温柔娘。前世的顾明月却没有珍惜，一份永远不可...");
+        detailArr.add("她是一个从21世纪穿越而来的孤儿冷心冷情的她却被几个爱她如命的家人渐渐捂热抛开前世的冰冷，从此用命去守护爱她的人兴家，立业，保护娘亲，照顾姐弟，收拾极品，异世也过的风生水起他是皇室不起眼的皇子从小冷眼看着...");
+        int size = titleArr.size();
+        for(int i=0; i<size; i++) {
+            Map<String, String> map = new HashMap<>();
+            String imgSrc = imgArr.get(i).toString();
+            String title = titleArr.get(i).toString();
+            String detail = detailArr.get(i).toString();
+            map.put("imgSrc",imgSrc);
+            map.put("title",title);
+            map.put("detail",detail);
+            editorRecommendList.add(map);
+        }
+        return editorRecommendList;
+    }
+
+    public List<Map<String,String>> getMainCarouselList() {
+        List<Map<String,String>> mainCarouselList = new ArrayList<>();
+        for(int i=0; i<5; i++) {
+            Map<String, String> map = new HashMap<>();
+            String imgSrc = "/image/zly" + (i+1) + ".jpg";
+            map.put("imgSrc",imgSrc);
+            mainCarouselList.add(map);
+        }
+        return mainCarouselList;
+    }
+    public List<Map<String,String>> getClassifyArticleList() {
+        List<Map<String,String>> classifyArticleList = new ArrayList<>();
+        for(int i=0; i<6; i++) {
+            Map<String, String> map = new HashMap<>();
+            String classify = "玄幻";
+            String article = "前途莫测剑问道:万道争锋";
+            map.put("classify",classify);
+            map.put("article",article);
+            classifyArticleList.add(map);
+        }
+        return classifyArticleList;
     }
 }

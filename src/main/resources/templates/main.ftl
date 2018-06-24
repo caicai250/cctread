@@ -65,42 +65,11 @@
                         </#list>
                     </ul>
                 </div>
-                <#--轮播图-->
+
                 <div class="container img-container">
-                    <div id="myCarousel" class="carousel slide">
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"> </li>
-                            <li data-target="#myCarousel" data-slide-to="1"> </li>
-                            <li data-target="#myCarousel" data-slide-to="2"> </li>
-                            <li data-target="#myCarousel" data-slide-to="3"> </li>
-                            <li data-target="#myCarousel" data-slide-to="4"> </li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="${request.contextPath}/image/zly1.jpg" alt="第一张" />
-                            </div>
-                            <div class="item">
-                                <img src="${request.contextPath}/image/zly2.jpg" alt="第二张" />
-                            </div>
-                            <div class="item">
-                                <img src="${request.contextPath}/image/zly3.jpg" alt="第三张" />
-                            </div>
-                            <div class="item">
-                                <img src="${request.contextPath}/image/zly4.jpg" alt="第四张" />
-                            </div>
-                            <div class="item">
-                                <img src="${request.contextPath}/image/zly5.jpg" alt="第五张" />
-                            </div>
-
-                        </div>
-                        <a href="#myCarousel" data-slide="prev" class="carousel-control left">
-                            <span class="glyphicon glyphicon-chevron-left"> </span>
-                        </a>
-                        <a href="#myCarousel" data-slide="next" class="carousel-control right">
-                            <span class="glyphicon glyphicon-chevron-right"> </span>
-                        </a>
-                    </div>
-
+                    <#--轮播图-->
+                    <@main.myCarousel id="myCarousel" mainCarouselList=mainCarouselList />
+                    <#--头条信息列表-->
                     <div class="title-container">
                         <img src="${request.contextPath}/image/zly1.jpg"/>
                         <ul>
@@ -118,48 +87,10 @@
                     <@main.rankData title="排行榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
 
                     <div class="editor-recommend">
-                        <div class="model-name">
-                            <p>编辑强推</p>
-                        </div>
-                        <div class="editor-container">
-                            <div class="editor-img">
-                                <img src="${request.contextPath}/image/ad5.jpg">
-                            </div>
-                            <div class="description">
-                                <div class="book-detail" style="position: absolute; top: 0px; left: 0px; display: block;">
-                                    <h4><a href="/info/396952.html" target="_blank">女人不狠，地位不稳</a></h4>
-                                    <p>【一部女王崛起史，复仇，商战，职场】四年前，风靡全城的沈家千金，陆氏少夫人锒铛入狱。身为丈夫的他不仅不闻不问，还让律师送来了离婚协议和孩子的抚养协议。留下一句：“从一开始，我爱的就不是你。”出狱后，面对周...</p>
-                                    <a class="btn-read" href="/info/396952.html" target="_blank">立即阅读</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="editor-container">
-                            <div class="editor-img">
-                                <img src="${request.contextPath}/image/ad6.jpg">
-                            </div>
-                            <div class="description">
-                                <div class="book-detail" style="position: absolute; top: 0px; left: 0px; display: block;">
-                                    <h4><a href="/info/396952.html" target="_blank">女人不狠，地位不稳</a></h4>
-                                    <p>【一部女王崛起史，复仇，商战，职场】四年前，风靡全城的沈家千金，陆氏少夫人锒铛入狱。身为丈夫的他不仅不闻不问，还让律师送来了离婚协议和孩子的抚养协议。留下一句：“从一开始，我爱的就不是你。”出狱后，面对周...</p>
-                                    <a class="btn-read" href="/info/396952.html" target="_blank">立即阅读</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="editor-container">
-                            <div class="editor-img">
-                                <img src="${request.contextPath}/image/ad7.jpg">
-                            </div>
-                            <div class="description">
-                                <div class="book-detail" style="position: absolute; top: 0px; left: 0px; display: block;">
-                                    <h4><a href="/info/396952.html" target="_blank">女人不狠，地位不稳</a></h4>
-                                    <p>【一部女王崛起史，复仇，商战，职场】四年前，风靡全城的沈家千金，陆氏少夫人锒铛入狱。身为丈夫的他不仅不闻不问，还让律师送来了离婚协议和孩子的抚养协议。留下一句：“从一开始，我爱的就不是你。”出狱后，面对周...</p>
-                                    <a class="btn-read" href="/info/396952.html" target="_blank">立即阅读</a>
-                                </div>
-                            </div>
-                        </div>
-
+                        <@main.modelName name="编辑强推" />
+                        <#list editorRecommendList as editorRecommendData>
+                            <@main.editorRecommend editorRecommendData=editorRecommendData />
+                        </#list>
                     </div>
 
                     <@main.rankData title="本周推荐" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
@@ -168,23 +99,31 @@
                 <@main.advert advertPath=request.contextPath+"/image/ad4.jpg" />
 
                 <div class="container recommend-container">
-                    <@main.bookType bookTypeName="古代言情" romanceList=modernRomanceList />
+                    <div class="classify-article">
+                        <@main.modelName name="分类好文" />
+                        <@main.myCarousel id="myCarousel1" mainCarouselList=mainCarouselList />
+                        <@main.classifyActicle classifyArticleList=classifyArticleList />
+                    </div>
                     <@main.bookType bookTypeName="现代言情" romanceList=modernRomanceList />
+                    <@main.bookType bookTypeName="古代言情" romanceList=modernRomanceList />
                     <@main.bookType bookTypeName="玄幻言情" romanceList=modernRomanceList />
-                    <@main.bookType bookTypeName="浪漫青春" romanceList=modernRomanceList />
                 </div>
                 <div class="container recommend-container">
+                    <div class="classify-article">
+                        <@main.modelName name="分类好文" />
+                        <@main.myCarousel id="myCarousel2" mainCarouselList=mainCarouselList />
+                        <@main.classifyActicle classifyArticleList=classifyArticleList />
+                    </div>
+                    <@main.bookType bookTypeName="玄幻仙侠" romanceList=modernRomanceList />
                     <@main.bookType bookTypeName="悬疑灵异" romanceList=modernRomanceList />
                     <@main.bookType bookTypeName="科幻游戏" romanceList=modernRomanceList />
-                    <@main.bookType bookTypeName="改编频道" romanceList=modernRomanceList />
-                    <@main.bookType bookTypeName="更多作品" romanceList=modernRomanceList />
                 </div>
 
                 <@main.advert advertPath=request.contextPath+"/image/ad2.jpg" />
 
                 <div class="container recommend-container">
                     <@main.rankData title="收藏榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="月票" />
-                    <@main.rankData title="收藏榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=false unit="" />
+                    <@main.rankData title="阅读榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=false unit="" />
                     <@main.rankData title="点赞榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="点赞数" />
                     <@main.rankData title="下载榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="下载数" />
                 </div>
@@ -203,9 +142,4 @@
     $("#myCarousel").carousel({
         interval :3000,
     });
-    // $("#myCarousel1").carousel({
-    //     interval :3000,
-    // });
-
-
 </script>
