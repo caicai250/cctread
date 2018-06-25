@@ -7,6 +7,10 @@ import com.example.entity.CctChapter;
 import com.example.entity.CctNovel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 /**
  * @Auther: caic
@@ -23,12 +27,14 @@ public class NovelServiceImpl implements NovelService {
     @Autowired
     CctNovelMapper cctNovelMapper;
 
-    /**
-     * 保存书籍信息
-     * @param cctNovel
-     */
     @Override
-    public void saveNovel(CctNovel cctNovel) {
+    public void saveNovel(CctNovel cctNovel, File file) {
+
+    }
+
+    @Transactional
+    @Override
+    public void saveNovel(CctNovel cctNovel, FileInputStream fileInputStream) {
 
     }
 }
