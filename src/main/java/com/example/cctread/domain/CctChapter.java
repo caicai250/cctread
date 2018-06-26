@@ -16,6 +16,7 @@ public class CctChapter {
     private Date updateDate;
     private int startRow;
     private int endRow;
+    private String chapterPath;
 
     public int getChapterId() {
         return chapterId;
@@ -71,5 +72,13 @@ public class CctChapter {
 
     public void setEndRow(int endRow) {
         this.endRow = endRow;
+    }
+
+    public String getChapterPath() {
+        return chapterPath;
+    }
+
+    public void setChapterPath(String chapterPath) {
+        this.chapterPath = chapterPath;
     }
 }

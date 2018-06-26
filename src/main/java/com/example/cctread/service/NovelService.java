@@ -1,6 +1,7 @@
 package com.example.cctread.service;
 
-import com.example.entity.CctNovel;
+
+import com.example.cctread.domain.CctNovel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ public interface NovelService {
      * @param cctNovel 书籍信息
      * @param file 书籍文件
      */
-    void saveNovel(CctNovel cctNovel,File file);
+    void saveNovel(CctNovel cctNovel, File file);
 
     /**
      * 通过文件流的方式上传文件

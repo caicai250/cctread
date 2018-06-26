@@ -1,5 +1,7 @@
 package com.example.cctutil.io;
 
+import com.example.cctutil.exception.CctException;
+
 import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,6 +13,43 @@ import java.util.regex.Pattern;
  * @Version: 1.0
  */
 public class FileUtil {
+
+    /**
+     * 校验文件编码是否UTF-8
+     * @param file
+     * @return
+     */
+    public static boolean checkCode(File file){
+        try {
+            return checkCode(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new CctException("程序异常,传入文件为空");
+        }
+    }
+
+    /**
+     * 校验文件编码是否UTF-8
+     * @param fileInputStream
+     * @return
+     */
+    public static boolean checkCode(FileInputStream fileInputStream){
+        if(fileInputStream==null){
+            throw new CctException("程序异常,传入文件为空");
+        }
+        byte[] b = new byte[3];
+        try {
+            fileInputStream.read(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (b[0] == -17 && b[1] == -69 && b[2] == -65) {//编码为UTF-8，linux环境默认编码是UTF-8
+            return true;
+        } else {//编码可能为GBK，windows环境默认编码是GBK
+            return false;
+        }
+    }
+
 //    /**
 //     * 读取书籍指定某行到某行
 //     *
