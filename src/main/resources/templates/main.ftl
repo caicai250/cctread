@@ -25,7 +25,7 @@
                                 <input type="text" placeholder="搜索" class="navbar-input">
                                 <button class="glyphicon glyphicon-search navbar-button"></button>
                                 <#list rightButtonList as em>
-                                    <li><a href="">em.value</a> </li>
+                                    <li><a href="">${em.value}</a> </li>
                                 </#list>
                             </ul>
                         </div>
