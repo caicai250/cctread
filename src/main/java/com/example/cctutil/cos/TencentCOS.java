@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 
@@ -138,7 +139,7 @@ public class TencentCOS {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, txtPath);
             COSObject cosObject = getCosClient().getObject(getObjectRequest);
             COSObjectInputStream cosObjectInput = cosObject.getObjectContent();
-            str = IOUtil.inputStreamToString(cosObjectInput, "GBK");
+            str = IOUtil.inputStreamToString(cosObjectInput, "UTF-8");
             cosObjectInput.close();
         } catch (CosServiceException cse) {
             String msg = "文件" + txtPath + "不存在";
@@ -179,6 +180,28 @@ public class TencentCOS {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * 使用流上传文本
+     *
+     * @param fileInputStream   上传文件流
+     * @param key 路径
+     * @书名命名格式 书名_作者名_章节编号
+     */
+    public static void putObject(FileInputStream fileInputStream, String key) {
+        try {
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            // 设置输入流长度
+            objectMetadata.setContentLength(fileInputStream.available());
+            // 设置 Content type, 默认是 application/octet-stream
+            //objectMetadata.setContentType("application/pdf");
+            PutObjectResult putObjectResult = getCosClient().putObject(bucketName, key, fileInputStream, objectMetadata);
+            String etag = putObjectResult.getETag();
+            log.info("上传<" + etag + ">成功");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -2,6 +2,8 @@ package com.example.cctread.dao;
 
 import com.example.cctread.domain.CctChapter;
 
+import java.util.List;
+
 /**
  * @Auther: caic
  * @Date: 2018/6/21 11:58
@@ -9,5 +11,5 @@ import com.example.cctread.domain.CctChapter;
  * @Version: 1.0
  */
 public interface CctChapterMapper {
-    void saveChapter(CctChapter cctChapter);
+    void saveChapter(List<CctChapter> chapterList);
 }

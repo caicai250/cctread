@@ -1,12 +1,20 @@
 package com.example.cctread.service.impl;
 
-import com.example.cctread.dao.CctChapterMapper;
 import com.example.cctread.dao.CctNovelMapper;
+import com.example.cctread.domain.CctNovel;
+import com.example.cctread.service.ChapterService;
 import com.example.cctread.service.NovelService;
-import com.example.entity.CctChapter;
-import com.example.entity.CctNovel;
+import com.example.cctutil.cos.TencentCOS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Auther: caic
@@ -18,17 +26,25 @@ import org.springframework.stereotype.Service;
 public class NovelServiceImpl implements NovelService {
 
     @Autowired
-    CctChapterMapper cctChapterMapper;
-
-    @Autowired
     CctNovelMapper cctNovelMapper;
 
-    /**
-     * 保存书籍信息
-     * @param cctNovel
-     */
-    @Override
-    public void saveNovel(CctNovel cctNovel) {
+    @Autowired
+    ChapterService chapterService;
 
+    @Override
+    public void saveNovel(CctNovel cctNovel, File file) {
+        try {
+            saveNovel(cctNovel,new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional
+    @Override
+    public void saveNovel(CctNovel cctNovel, FileInputStream fileInputStream) {
+        cctNovelMapper.saveNovel(cctNovel);
+        TencentCOS.putObject(fileInputStream,"/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
+        chapterService.saveChapter(cctNovel.getNovelId(),fileInputStream);
     }
 }
