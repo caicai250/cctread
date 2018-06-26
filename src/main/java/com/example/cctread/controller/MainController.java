@@ -21,6 +21,8 @@ public class MainController {
 
     @RequestMapping(value = "/main")
     public String index(ModelMap model) {
+        //固定栏右侧按钮
+        List rightButtonList = getRightButtonList();
         //头条列表
         List tilteMenu = getTitleMenu();
         //现代言情列表
@@ -34,6 +36,7 @@ public class MainController {
         //分类好文
         List classifyArticleList = getClassifyArticleList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
+        model.addAttribute("rightButtonList", rightButtonList);
         model.addAttribute("titleMenu", tilteMenu);
         model.addAttribute("modernRomanceList", modernRomanceList);
         model.addAttribute("collectionList", collectionList);
@@ -54,6 +57,21 @@ public class MainController {
 
         model.addAttribute("book", book);
         return "main";//返回的内容就是templetes下面文件的名称
+    }
+
+    public List<Map<String,String>> getRightButtonList() {
+        List<Map<String,String>> getRightButtonList = new ArrayList<>();
+        ArrayList  arrMenu = new ArrayList();
+        arrMenu.add("登录");
+        arrMenu.add("注册");
+        arrMenu.add("我的书架");
+        arrMenu.add("联系客服");
+        for(int i=0; i<arrMenu.size(); i++) {
+            Map<String, String> map = new HashMap<>();
+            map.put("value",arrMenu.get(i).toString());
+            getRightButtonList.add(map);
+        }
+        return getRightButtonList;
     }
 
     public List<Map<String,String>> getTitleMenu() {

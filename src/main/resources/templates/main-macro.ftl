@@ -38,9 +38,9 @@
                 <#list mainCarouselList as em>
                     <#--默认从第一张开始轮播-->
                     <#if em?index == 0 >
-                    <li data-target="#myCarousel" data-slide-to="${em?index}" class="active"> </li>
+                    <li data-target="#${id}" data-slide-to="${em?index}" class="active"> </li>
                     <#else>
-                    <li data-target="#myCarousel" data-slide-to="${em?index}"> </li>
+                    <li data-target="#${id}" data-slide-to="${em?index}"> </li>
                     </#if>
                 </#list>
             </ol>

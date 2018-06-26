@@ -14,24 +14,19 @@
             <div id="home-container">
                 <nav class="navbar navbar-default navbar-fixed-top">
                     <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
                         <div class="collapse navbar-collapse" id="navbar-collapse">
+                            <#--<img class="index-logo" src="${request.contextPath}/image/logo.png" alt="${title}"></a>-->
                             <ul class="nav navbar-nav" style="margin-top:0">
                             <#list listMuen as em>
                                 <li ><a href="javascript:alert(${em.codeProice});">${em.codeName}</a></li>
                             </#list>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
-                                <li> <a href="">登录</a></li>
-                                <li><a href="">注册</a></li>
-                                <li><a href="">我的书架</a></li>
-                                <li><a href="">联系客服</a></li>
+                                <input type="text" placeholder="搜索" class="navbar-input">
+                                <button class="glyphicon glyphicon-search navbar-button"></button>
+                                <#list rightButtonList as em>
+                                    <li><a href="">em.value</a> </li>
+                                </#list>
                             </ul>
                         </div>
                     </div>
@@ -46,6 +41,7 @@
                     <button type="button" class="btn btn-sm author-button" style="margin-right: 10px">
                         <span class="glyphicon glyphicon-edit"></span>我要当作家
                     </button>
+                    <#--搜索框-->
                     <div class="input-group">
                         <input type="text" class="form-control">
                         <span class="input-group-addon">
@@ -55,6 +51,7 @@
                         </span>
                     </div>
                 </div>
+
                 <div class="container book-style-contaoner">
                     <ul class="nav navbar-nav" style="margin-top:0">
                         <li>
@@ -78,7 +75,6 @@
                             </#list>
                         </ul>
                     </div>
-
                 </div>
 
                 <@main.advert advertPath=request.contextPath+"/image/ad.jpg" />
@@ -140,6 +136,12 @@
 
     //自动播放
     $("#myCarousel").carousel({
+        interval :3000,
+    });
+    $("#myCarousel1").carousel({
+        interval :3000,
+    });
+    $("#myCarousel2").carousel({
         interval :3000,
     });
 </script>
