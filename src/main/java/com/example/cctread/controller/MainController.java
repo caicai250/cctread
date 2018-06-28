@@ -43,7 +43,6 @@ public class MainController {
         model.addAttribute("editorRecommendList", editorRecommendList);
         model.addAttribute("mainCarouselList", mainCarouselList);
         model.addAttribute("classifyArticleList", classifyArticleList);
-        model.addAttribute("title", "常春藤阅读");
 
 
         String chapterName = "斗破苍穹_天蚕土豆_1";
@@ -56,7 +55,7 @@ public class MainController {
 
 
         model.addAttribute("book", book);
-        return "main";//返回的内容就是templetes下面文件的名称
+        return "index/main";//返回的内容就是templetes下面文件的名称
     }
 
     public List<Map<String,String>> getRightButtonList() {
