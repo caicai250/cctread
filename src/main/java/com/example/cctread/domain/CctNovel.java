@@ -109,4 +109,21 @@ public class CctNovel {
     public void setIntro(String intro) {
         this.intro = intro;
     }
+
+    @Override
+    public String toString() {
+        return "CctNovel{" +
+                "novelId=" + novelId +
+                ", novelTitle='" + novelTitle + '\'' +
+                ", novelType='" + novelType + '\'' +
+                ", author='" + author + '\'' +
+                ", novelState='" + novelState + '\'' +
+                ", startDate=" + startDate +
+                ", updateDate=" + updateDate +
+                ", novelCover=" + novelCover +
+                ", isCharge='" + isCharge + '\'' +
+                ", bookLike=" + bookLike +
+                ", intro='" + intro + '\'' +
+                '}';
+    }
 }

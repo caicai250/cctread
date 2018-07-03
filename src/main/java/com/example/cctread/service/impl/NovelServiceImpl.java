@@ -10,12 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @Auther: caic
  * @Date: 2018/6/21 14:28
@@ -26,10 +20,10 @@ import java.util.regex.Pattern;
 public class NovelServiceImpl implements NovelService {
 
     @Autowired
-    CctNovelMapper cctNovelMapper;
+    private CctNovelMapper cctNovelMapper;
 
     @Autowired
-    ChapterService chapterService;
+    private ChapterService chapterService;
 
     @Override
     public void saveNovel(CctNovel cctNovel, File file) {

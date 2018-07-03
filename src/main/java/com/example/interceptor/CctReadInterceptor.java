@@ -43,7 +43,8 @@ public class CctReadInterceptor implements HandlerInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        modelAndView.getModelMap().addAttribute("title", "常春藤阅读");
+        log.debug("------------url="+httpServletRequest.getRequestURI()+"------------");
+        if(modelAndView!=null)modelAndView.getModelMap().addAttribute("title", "常春藤阅读");
         log.debug("------------拦截器，Controller方法调用之后----------------");
     }
 
