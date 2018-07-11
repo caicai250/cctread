@@ -5,16 +5,22 @@ import com.example.cctread.domain.Code;
 import com.example.cctread.service.CodeService;
 import com.example.cctread.service.NovelService;
 import freemarker.template.TemplateException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +51,10 @@ public class AdminController {
     }
 
     @RequestMapping(value="uploadbook",method = RequestMethod.POST)
-    public String uploadBook(@RequestParam ("book") MultipartFile file, CctNovel cctNovel){
+    @ResponseBody
+    public String uploadBook(@RequestParam ("book") MultipartFile file, CctNovel cctNovel,BindingResult bindingResult) throws IOException{
         System.out.println(cctNovel.toString());
-        return null;
+        novelService.saveNovel(cctNovel,(FileInputStream) file.getInputStream());
+        return "上传成功";
     }
 }

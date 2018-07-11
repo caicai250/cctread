@@ -13,10 +13,10 @@
         <result column="end_row" property="endRow"/>
     </resultMap>
 
-    <insert id="saveNovel">
+    <insert id="saveChapter">
        INSERT INTO cct_chapter (novel_id, chapter_name, synopsis, update_date,start_row,end_row,chapter_path) VALUES
-        <foreach collection ="list" item="CctChapter" separator =",">
-            (#{CctChapter.novelId},#{CctChapter.chapterName},#{CctChapter.synopsis},#{CctChapter.updateDate},#{CctChapter.startRow},#{CctChapter.endRow},#{CctChapter.chapterPath});
+        <foreach collection ="list" item="CctChapter" index="index" separator =",">
+            (#{CctChapter.novelId},#{CctChapter.chapterName},#{CctChapter.synopsis},#{CctChapter.updateDate},#{CctChapter.startRow},#{CctChapter.endRow},#{CctChapter.chapterPath})
         </foreach >
     </insert>
 </mapper>

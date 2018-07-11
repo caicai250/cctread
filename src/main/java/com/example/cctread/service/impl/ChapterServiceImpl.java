@@ -1,7 +1,6 @@
 package com.example.cctread.service.impl;
 
 import com.example.cctread.dao.CctChapterMapper;
-import com.example.cctread.dao.CctNovelMapper;
 import com.example.cctread.domain.CctChapter;
 import com.example.cctread.service.ChapterService;
 import com.example.cctutil.cos.TencentCOS;
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ public class ChapterServiceImpl implements ChapterService {
     public void saveChapter(int novelId, FileInputStream fileInputStream) {
         LineNumberReader reader = null;
         InputStreamReader isr = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             long timeStart = System.currentTimeMillis();
 
@@ -56,7 +58,11 @@ public class ChapterServiceImpl implements ChapterService {
                     CctChapter cctChapter=new CctChapter();
                     cctChapter.setNovelId(novelId);
                     cctChapter.setChapterName(chapterName);
-                    cctChapter.setUpdateDate(new Date());
+                    try {
+                        cctChapter.setUpdateDate(formatter.parse(formatter.format(new Date())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     cctChapter.setChapterPath(chapterPath);
                     cctChapter.setStartRow(row);
                     cctChapter.setEndRow(reader.getLineNumber());

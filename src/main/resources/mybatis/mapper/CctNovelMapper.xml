@@ -18,7 +18,7 @@
         <result column="intro" property="intro"/>
     </resultMap>
 
-    <insert id="saveNovel"  parameterType="com.example.cctread.domain.CctNovel" useGeneratedKeys="true" keyProperty="id">
+    <insert id="saveNovel" parameterType="com.example.cctread.domain.CctNovel" useGeneratedKeys="true" keyProperty="novelId">
         INSERT INTO cct_novel (novel_title, novel_type, author, novel_state, start_date, update_date, novel_cover, ischarge, book_like, intro)
         VALUES (#{novelTitle},#{novelType},#{author},#{novelState},#{startDate},#{updateDate},#{novelCover,},#{isCharge},#{bookLike},#{intro});
     </insert>

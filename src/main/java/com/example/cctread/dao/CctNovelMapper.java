@@ -9,5 +9,5 @@ import com.example.cctread.domain.CctNovel;
  * @Version: 1.0
  */
 public interface CctNovelMapper {
-    CctNovel saveNovel(CctNovel cctNovel);
+    void saveNovel(CctNovel cctNovel);
 }

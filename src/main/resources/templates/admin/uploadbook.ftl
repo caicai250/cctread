@@ -8,7 +8,8 @@
     <#import "../macro/select.ftl" as select/>
 </head>
 <body>
-<form role="form" th:action="${request.contextPath}/uploadbook"  method="POST" enctype ="multipart/form-data">
+<form role="form" action="${request.contextPath}/uploadbook"  method="POST" enctype ="multipart/form-data">
+    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
     <div class="form-group">
         <label for="novelTitle">书籍名称</label>
         <input type="text" class="form-control" id="novelTitle" name="novelTitle" placeholder="请输入名称">
