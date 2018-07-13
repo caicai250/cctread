@@ -10,4 +10,5 @@ import com.example.cctread.domain.CctNovel;
  */
 public interface CctNovelMapper {
     void saveNovel(CctNovel cctNovel);
+    CctNovel selectNovel(int novelId);
 }

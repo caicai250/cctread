@@ -25,7 +25,7 @@
             <@modelName name=bookTypeName />
             <ul>
                 <#list romanceList as em>
-                    <li ><a href="javascript:alert(${em.key});">${em.value}</a></li>
+                    <li ><a href="${request.contextPath}/tonovelpage?novelId=${em.key}">${em.value}</a></li>
                 </#list>
             </ul>
         </div>
@@ -125,7 +125,7 @@
                                 <span class="piao">${em.author}</span>
                             </#if>
                             <span class="num">${em?index+1}</span>
-                            <p><a href="${em.key}" target="_blank">${em.value}</a></p>
+                            <p><a href="${request.contextPath}/tonovelpage?novelId=${em.key}" target="_blank">${em.value}</a></p>
                         </li>
                     </#if>
                 </#list>

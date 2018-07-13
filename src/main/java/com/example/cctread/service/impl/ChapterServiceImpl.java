@@ -100,7 +100,12 @@ public class ChapterServiceImpl implements ChapterService {
     }
 
     @Override
-    public void saveChapter(int novelId, File file) {
+    public void saveChapter(int novelId, File file) throws FileNotFoundException {
+        saveChapter(novelId,new FileInputStream(file));
+    }
 
+    @Override
+    public List <CctChapter> selectChapter(int novelId, int start, int limit) {
+        return cctChapterMapper.selectChapter(novelId,start,limit);
     }
 }

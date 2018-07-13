@@ -19,4 +19,8 @@
             (#{CctChapter.novelId},#{CctChapter.chapterName},#{CctChapter.synopsis},#{CctChapter.updateDate},#{CctChapter.startRow},#{CctChapter.endRow},#{CctChapter.chapterPath})
         </foreach >
     </insert>
+
+    <select id="selectChapter" resultMap="chapterList" parameterType="int">
+        select * from cct_chapter where novel_id=#{novelId} limit #{start},#{limit}
+    </select>
 </mapper>

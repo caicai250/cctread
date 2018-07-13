@@ -12,7 +12,7 @@
         <result column="novel_state" property="novelState"/>
         <result column="start_date" property="startDate"/>
         <result column="update_date" property="updateDate"/>
-        <result column="novel_cover" property="novelCover" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
+        <result column="novel_cover" property="novelCover"/>
         <result column="ischarge" property="isCharge"/>
         <result column="book_like" property="bookLike"/>
         <result column="intro" property="intro"/>
@@ -22,4 +22,8 @@
         INSERT INTO cct_novel (novel_title, novel_type, author, novel_state, start_date, update_date, novel_cover, ischarge, book_like, intro)
         VALUES (#{novelTitle},#{novelType},#{author},#{novelState},#{startDate},#{updateDate},#{novelCover,},#{isCharge},#{bookLike},#{intro});
     </insert>
+
+    <select id="selectNovel" parameterType="int" resultMap="novelList">
+        select * from cct_novel where novel_id=#{novelId}
+    </select>
 </mapper>

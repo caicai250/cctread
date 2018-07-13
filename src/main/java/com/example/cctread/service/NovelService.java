@@ -2,6 +2,7 @@ package com.example.cctread.service;
 
 
 import com.example.cctread.domain.CctNovel;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +24,14 @@ public interface NovelService {
     /**
      * 通过文件流的方式上传文件
      * @param cctNovel 书籍信息
-     * @param fileInputStream 书籍文件输入流
+     * @param book 书籍文件输入流
      */
-    void saveNovel(CctNovel cctNovel,FileInputStream fileInputStream);
+    void saveNovel(CctNovel cctNovel, MultipartFile book);
+
+    /**
+     * 查询书籍信息
+     * @param novelId
+     * @return
+     */
+    CctNovel selectNovel(String novelId);
 }

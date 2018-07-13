@@ -8,6 +8,7 @@ import com.example.cctutil.cos.TencentCOS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 /**
@@ -27,18 +28,26 @@ public class NovelServiceImpl implements NovelService {
 
     @Override
     public void saveNovel(CctNovel cctNovel, File file) {
-        try {
-            saveNovel(cctNovel,new FileInputStream(file));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+            saveNovel(cctNovel,file);
     }
 
     @Transactional
     @Override
-    public void saveNovel(CctNovel cctNovel, FileInputStream fileInputStream) {
-        cctNovelMapper.saveNovel(cctNovel);
-        TencentCOS.putObject(fileInputStream,"/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
-        chapterService.saveChapter(cctNovel.getNovelId(),fileInputStream);
+    public void saveNovel(CctNovel cctNovel,MultipartFile book){
+        try {
+            cctNovelMapper.saveNovel(cctNovel);
+            chapterService.saveChapter(cctNovel.getNovelId(),(FileInputStream) book.getInputStream());
+            TencentCOS.putObject((FileInputStream) book.getInputStream(),"/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public CctNovel selectNovel(String novelId) {
+        if(novelId==null||"".equals(novelId.trim())){
+            return null;
+        }
+        return cctNovelMapper.selectNovel(Integer.parseInt(novelId));
     }
 }

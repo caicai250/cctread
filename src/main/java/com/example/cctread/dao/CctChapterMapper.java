@@ -12,4 +12,5 @@ import java.util.List;
  */
 public interface CctChapterMapper {
     void saveChapter(List<CctChapter> chapterList);
+    List<CctChapter> selectChapter(int novelId,int start,int limit);
 }
