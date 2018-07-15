@@ -106,6 +106,40 @@ public class ChapterServiceImpl implements ChapterService {
 
     @Override
     public List <CctChapter> selectChapter(int novelId, int start, int limit) {
-        return cctChapterMapper.selectChapter(novelId,start,limit);
+        return cctChapterMapper.selectChapterList(novelId,start,limit);
+    }
+
+    @Override
+    public CctChapter getChapter(int chapterId) {
+        return cctChapterMapper.getChapter(chapterId);
+    }
+
+    @Override
+    public String getChapterTXT(String novelId, String chapterId) {
+        CctChapter chapter=null;
+        if(chapterId!=null&&!"".equals(chapterId.trim())){
+            chapter=getChapter(Integer.parseInt(chapterId));
+        }else{
+            chapter=getFirstChapter(Integer.parseInt(novelId));
+        }
+        String txt=TencentCOS.getObject(chapter.getChapterPath());
+        System.out.println(txt);
+        return txt;
+    }
+
+    @Override
+    public CctChapter getFirstChapter(int novelId) {
+        return cctChapterMapper.getFirstChapter(novelId);
+    }
+
+    @Override
+    public InputStream getChapterInputStream(String novelId, String chapterId) {
+        CctChapter chapter=null;
+        if(chapterId!=null&&!"".equals(chapterId.trim())){
+            chapter=getChapter(Integer.parseInt(chapterId));
+        }else{
+            chapter=getFirstChapter(Integer.parseInt(novelId));
+        }
+        return TencentCOS.getObjectInputStream(chapter.getChapterPath());
     }
 }

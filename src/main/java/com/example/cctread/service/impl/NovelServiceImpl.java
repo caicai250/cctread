@@ -50,4 +50,9 @@ public class NovelServiceImpl implements NovelService {
         }
         return cctNovelMapper.selectNovel(Integer.parseInt(novelId));
     }
+
+    @Override
+    public String getShowdownUrl(String filePath) {
+        return TencentCOS.getDownUrl(filePath);
+    }
 }

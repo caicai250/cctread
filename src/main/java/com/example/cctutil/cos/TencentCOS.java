@@ -3,6 +3,7 @@ package com.example.cctutil.cos;
 import com.example.cctutil.io.IOUtil;
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.exception.CosServiceException;
+import com.qcloud.cos.http.HttpMethodName;
 import com.qcloud.cos.model.*;
 import com.qcloud.cos.transfer.Download;
 import com.qcloud.cos.transfer.TransferManager;
@@ -10,10 +11,9 @@ import com.qcloud.cos.transfer.Upload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 
 
@@ -139,7 +139,7 @@ public class TencentCOS {
             GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, txtPath);
             COSObject cosObject = getCosClient().getObject(getObjectRequest);
             COSObjectInputStream cosObjectInput = cosObject.getObjectContent();
-            str = IOUtil.inputStreamToString(cosObjectInput, "UTF-8");
+            str = IOUtil.inputStreamToString(cosObjectInput, "GBK");
             cosObjectInput.close();
         } catch (CosServiceException cse) {
             String msg = "文件" + txtPath + "不存在";
@@ -161,7 +161,7 @@ public class TencentCOS {
         ByteArrayInputStream byteArrayInputStream = null;
         try {
             //文本转字节流
-            byteArrayInputStream = new ByteArrayInputStream(text.getBytes("GBK"));
+            byteArrayInputStream = new ByteArrayInputStream(text.getBytes("UTF-8"));
 
             ObjectMetadata objectMetadata = new ObjectMetadata();
             //获取流长度
@@ -203,6 +203,34 @@ public class TencentCOS {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 生成一个带签名的下载链接，有效期24小时
+     * @param key
+     * @return
+     */
+    public static String getDownUrl(String key){
+        // 生成一个下载链接
+        GeneratePresignedUrlRequest req =
+                new GeneratePresignedUrlRequest(bucketName, key, HttpMethodName.GET);
+        // 设置签名过期时间(可选), 若未进行设置, 则默认使用 ClientConfig 中的签名过期时间(5分钟)
+        // 这里设置签名在24个小时后过期
+        Date expirationDate = new Date(System.currentTimeMillis() + 24L * 60L * 60L * 1000L);
+        req.setExpiration(expirationDate);
+        URL downloadUrl = TenCentCosClient.getCosClient().generatePresignedUrl(req);
+        return downloadUrl.toString();
+    }
+
+    /**
+     * 获取文件输入流
+     * @param txtPath
+     * @return
+     */
+    public static InputStream getObjectInputStream(String txtPath){
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, txtPath);
+        COSObject cosObject = getCosClient().getObject(getObjectRequest);
+        return cosObject.getObjectContent();
     }
 
     public static COSClient getCosClient() {

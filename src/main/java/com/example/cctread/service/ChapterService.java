@@ -5,6 +5,7 @@ import com.example.cctread.domain.CctChapter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -36,4 +37,34 @@ public interface ChapterService {
      * @return
      */
     List<CctChapter> selectChapter(int novelId, int start, int limit);
+
+    /**
+     * 获取章节信息
+     * @param chapterId
+     * @return
+     */
+    CctChapter getChapter(int chapterId);
+
+    /**
+     * 获取章节文本，如果章节id为空，则取书籍id的第一章
+     * @param novelId 书籍id
+     * @param chapterId 章节id
+     * @return
+     */
+    String getChapterTXT(String novelId, String chapterId);
+
+    /**
+     * 获取书籍的第一章信息
+     * @param novelId
+     * @return
+     */
+    CctChapter getFirstChapter(int novelId);
+
+    /**
+     * 获取文件输入流
+     * @param novelId
+     * @param chapterId
+     * @return
+     */
+    InputStream getChapterInputStream(String novelId, String chapterId);
 }

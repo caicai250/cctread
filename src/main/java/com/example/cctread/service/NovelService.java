@@ -34,4 +34,11 @@ public interface NovelService {
      * @return
      */
     CctNovel selectNovel(String novelId);
+
+    /**
+     * 获取书籍下载链接
+     * @param filePath
+     * @return
+     */
+    String getShowdownUrl(String filePath);
 }

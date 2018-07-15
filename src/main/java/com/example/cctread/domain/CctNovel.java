@@ -1,5 +1,7 @@
 package com.example.cctread.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.sql.Blob;
 import java.util.Date;
 
@@ -15,7 +17,9 @@ public class CctNovel {
     private String novelType;
     private String author;
     private String novelState;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
     private String novelCover;
     private String isCharge;

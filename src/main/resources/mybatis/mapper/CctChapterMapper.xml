@@ -11,6 +11,7 @@
         <result column="update_date" property="updateDate"/>
         <result column="start_row" property="startRow"/>
         <result column="end_row" property="endRow"/>
+        <result column="chapter_path" property="chapterPath"/>
     </resultMap>
 
     <insert id="saveChapter">
@@ -20,7 +21,15 @@
         </foreach >
     </insert>
 
-    <select id="selectChapter" resultMap="chapterList" parameterType="int">
+    <select id="selectChapterList" resultMap="chapterList">
         select * from cct_chapter where novel_id=#{novelId} limit #{start},#{limit}
+    </select>
+
+    <select id="getChapter" resultMap="chapterList" parameterType="int">
+        select * from cct_chapter where chapter_id=#{chapterId}
+    </select>
+
+    <select id="getFirstChapter" resultMap="chapterList" parameterType="int">
+        select * from cct_chapter where chapter_id=(select min(chapter_id) from cct_chapter where novel_id=#{novelId})
     </select>
 </mapper>
