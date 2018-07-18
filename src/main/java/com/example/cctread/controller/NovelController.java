@@ -2,6 +2,7 @@ package com.example.cctread.controller;
 
 import com.example.cctread.domain.CctNovel;
 import com.example.cctread.service.NovelService;
+import com.example.cctutil.exception.CctException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -34,6 +35,9 @@ public class NovelController {
     @ResponseBody
     public String toNovelPage(ModelMap model, @RequestParam ( value = "novelId" ) String novelId) {
         CctNovel cctNovel= novelService.selectNovel(novelId);
+        if(cctNovel==null){
+            throw new CctException("没有查询到当前书籍，请联系管理员");
+        }
         String downUrl=novelService.getShowdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
         System.out.println(downUrl);
         return cctNovel.toString();
