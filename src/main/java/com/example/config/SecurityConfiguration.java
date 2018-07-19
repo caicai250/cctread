@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository());
         http.authorizeRequests().antMatchers("/main").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll();
     }
 
 }

@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.4/css/bootstrap.min.css">
-
-    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-
-
-
+    <link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="${request.contextPath}/webjars/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="${request.contextPath}/css/login.css">
 </head>
 <body>
 <div class="container">
@@ -42,4 +34,6 @@
     </div>
 </div>
 </body>
+<script src="${request.contextPath}/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="${request.contextPath}/webjars/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </html>
