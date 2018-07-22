@@ -1,0 +1,229 @@
+#navel-info-container {
+
+}
+#navel-info-container .book-profile {
+    margin-top: 20px;
+}
+#navel-info-container .book-profile dt {
+    float: left;
+    margin: 0 30px 0 0;
+    display: inline;
+}
+#navel-info-container .book-profile dt img {
+    width: 208px;
+    height: 285px;
+    border: 1px solid #e5e5e5;
+}
+#navel-info-container .book-profile dd {
+    overflow: hidden;
+    zoom: 1;
+    width: 79%;
+    float: left;
+    position: relative;
+}
+#navel-info-container .book-profile dd .title {
+    line-height: 70px;
+    height: 70px;
+    overflow: hidden;
+    zoom: 1;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0 0 14px;
+}
+#navel-info-container .book-profile dd .title h1 {
+    font-weight: normal;
+    font-size: 30px;
+    float: left;
+}
+#navel-info-container .book-profile dd .title span {
+    float: left;
+    line-height: 80px;
+    font-size: 14px;
+    padding: 0 0 0 25px;
+    color: #666;
+}
+#navel-info-container .book-profile dd .title span a {
+    color: #666;
+}
+#navel-info-container .book-profile dd .title .introcontent {
+    height: auto;
+    zoom: 1;
+    color: #333;
+    margin: 15px 0;
+}
+#navel-info-container .book-profile dd .title .introcontent p {
+    line-height: 30px;
+    text-indent: 2em;
+}
+#navel-info-container .book-profile dd .book-btns {
+    height: 40px;
+    overflow: hidden;
+    zoom: 1;
+    margin: 15px 0 0;
+}
+#navel-info-container .book-profile dd .book-btns a {
+    float: left;
+    line-height: 38px;
+    height: 38px;
+    width: 118px;
+    overflow: hidden;
+    zoom: 1;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #84aebb;
+    color: #84aebb;
+    margin: 0 10px 0 0;
+    display: inline;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+}
+#navel-info-container .book-profile dd .book-btns .btn-read {
+    background-color: #84aebb;
+    color: #fff;
+}
+#navel-info-container .book-detail-tab {
+    margin-top: 20px;
+}
+#navel-info-container .book-detail-tab .click-hd{
+    height: 45px;
+    line-height: 44px;
+}
+#navel-info-container .book-detail-tab .click-hd h3 {
+    float: left;
+    font-size: 18px;
+    padding: 2px 20px;
+    cursor: pointer;
+}
+.box-con .box-hd {
+    border-bottom: 1px solid #ddd;
+}
+.box-con .box-hd .active {
+    border-bottom: 2px solid #84aebb;
+    color: #84aebb;
+}
+#navel-info-container .book-detail-tab .click-bd .catalog {
+    display: none;
+}
+#navel-info-container .book-detail-tab .click-hd .book-detail {
+    display: block;
+}
+.catalog dt {
+    font-size: 18px;
+    padding: 0 0 8px 20px;
+    height: 24px;
+    border-bottom: 1px solid #000;
+    margin: 10px 0 5px;
+}
+.catalog .dd {
+    border-bottom: 1px solid #e5e5e5;
+}
+.catalog ul {
+    margin: 0;
+    padding: 0;
+}
+.catalog-list li {
+    float: left;
+    width: 260px;
+    padding: 0 25px 0 15px;
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    zoom: 1;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0 0 -1px;
+}
+.catalog-list li a {
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+}
+.discuss-content {
+    margin-top: 20px;
+}
+.profile-main-title {
+    font-size: 18px;
+    line-height: 40px;
+    font-weight: normal;
+    border-bottom: 1px solid #e5e5e6;
+}
+.profile-main-title .reviewtotal {
+    font-size: 14px;
+    color: #555;
+}
+.discuss-content .tab-bd {
+    line-height: 42px;
+    height: 42px;
+    /*border-bottom: 1px solid #e5e5e5;*/
+    color: #bdbdbd;
+    position: relative;
+}
+.discuss_list li {
+    padding: 20px 0 25px;
+    border-bottom: 1px solid #e6e6e6;
+    list-style: none;
+}
+.discuss_list li .user {
+    float: left;
+    margin: 0 11px 0 0;
+    display: inline;
+}
+.discuss_list li .user img {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #e6e6e6;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+.discuss_list li .discuss_info {
+    overflow: hidden;
+    zoom: 1;
+}
+.reader-reply dt {
+    height: 34px;
+    line-height: 34px;
+    overflow: hidden;
+    zoom: 1;
+    margin: 0 0 10px;
+}
+.reader-reply dt .username {
+    color: #84aebb;
+}
+.reader-reply dt .userlevel {
+    color: #333;
+}
+.reader-reply dt .sub-right {
+    float: right;
+    font-size: 12px;
+    color: #999;
+    vertical-align: middle;
+    margin: 0;
+}
+.reader-reply dt span {
+    display: inline;
+}
+.discuss_info dd {
+    color :#000;
+}
+.book-detail-tab .click-hd h3, .link_discuss {
+    float: left;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+}
+.book-detail-tab .click-hd a:hover{
+    color: #84aebb;
+    transition: color .3s,background-color .3s;
+    text-decoration: none;
+}
+.load-more {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f3f3f3;
+    text-align: center;
+    color: #999;
+}

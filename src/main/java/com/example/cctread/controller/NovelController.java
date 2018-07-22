@@ -2,6 +2,7 @@ package com.example.cctread.controller;
 
 import com.example.cctread.domain.CctNovel;
 import com.example.cctread.service.NovelService;
+import com.example.cctread.service.CodeService;
 import com.example.cctutil.exception.CctException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: caic
@@ -32,7 +37,6 @@ public class NovelController {
      * @return
      */
     @RequestMapping ( value = "/tonovelpage" )
-    @ResponseBody
     public String toNovelPage(ModelMap model, @RequestParam ( value = "novelId" ) String novelId) {
         CctNovel cctNovel= novelService.selectNovel(novelId);
         if(cctNovel==null){
@@ -40,7 +44,12 @@ public class NovelController {
         }
         String downUrl=novelService.getShowdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
         System.out.println(downUrl);
-        return cctNovel.toString();
+        //固定栏右侧按钮
+        List rightButtonList = getRightButtonList();
+        List listMuen = getListMueu();
+        model.addAttribute("listMuen",listMuen);
+        model.addAttribute("rightButtonList", rightButtonList);
+        return "novelpage/novelinfo";
     }
 
     /**
@@ -71,5 +80,38 @@ public class NovelController {
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<Map<String,String>> getListMueu() {
+        List<Map<String,String>> listMenu = new ArrayList<>();
+        ArrayList  arrMenu = new ArrayList();
+        arrMenu.add("古代言情");
+        arrMenu.add("现代言情");
+        arrMenu.add("玄幻仙侠");
+        arrMenu.add("浪漫青春");
+        arrMenu.add("都市校园");
+        arrMenu.add("悬疑灵异");
+        arrMenu.add("改编频道");
+        for(int i=0; i<arrMenu.size(); i++) {
+            Map<String, String> map = new HashMap<>();
+            map.put("value",arrMenu.get(i).toString());
+            listMenu.add(map);
+        }
+        return listMenu;
+    }
+
+    public List<Map<String,String>> getRightButtonList() {
+        List<Map<String,String>> getRightButtonList = new ArrayList<>();
+        ArrayList  arrMenu = new ArrayList();
+        arrMenu.add("登录");
+        arrMenu.add("注册");
+        arrMenu.add("我的书架");
+        arrMenu.add("联系客服");
+        for(int i=0; i<arrMenu.size(); i++) {
+            Map<String, String> map = new HashMap<>();
+            map.put("value",arrMenu.get(i).toString());
+            getRightButtonList.add(map);
+        }
+        return getRightButtonList;
     }
 }
