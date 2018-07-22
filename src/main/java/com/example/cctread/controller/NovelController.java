@@ -30,6 +30,9 @@ public class NovelController {
     @Autowired
     NovelService novelService;
 
+    @Autowired
+    private CodeService codeService;
+
     /**
      * 跳转到章节页面，查询当前书籍信息
      * @param model
@@ -46,8 +49,7 @@ public class NovelController {
         System.out.println(downUrl);
         //固定栏右侧按钮
         List rightButtonList = getRightButtonList();
-        List listMuen = getListMueu();
-        model.addAttribute("listMuen",listMuen);
+        model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
         model.addAttribute("rightButtonList", rightButtonList);
         return "novelpage/novelinfo";
     }
@@ -75,6 +77,10 @@ public class NovelController {
         } finally {
             try {
                 if (out != null) out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
                 if (input != null) input.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,23 +88,23 @@ public class NovelController {
         }
     }
 
-    public List<Map<String,String>> getListMueu() {
-        List<Map<String,String>> listMenu = new ArrayList<>();
-        ArrayList  arrMenu = new ArrayList();
-        arrMenu.add("古代言情");
-        arrMenu.add("现代言情");
-        arrMenu.add("玄幻仙侠");
-        arrMenu.add("浪漫青春");
-        arrMenu.add("都市校园");
-        arrMenu.add("悬疑灵异");
-        arrMenu.add("改编频道");
-        for(int i=0; i<arrMenu.size(); i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("value",arrMenu.get(i).toString());
-            listMenu.add(map);
-        }
-        return listMenu;
-    }
+//    public List<Map<String,String>> getListMueu() {
+//        List<Map<String,String>> listMenu = new ArrayList<>();
+//        ArrayList  arrMenu = new ArrayList();
+//        arrMenu.add("古代言情");
+//        arrMenu.add("现代言情");
+//        arrMenu.add("玄幻仙侠");
+//        arrMenu.add("浪漫青春");
+//        arrMenu.add("都市校园");
+//        arrMenu.add("悬疑灵异");
+//        arrMenu.add("改编频道");
+//        for(int i=0; i<arrMenu.size(); i++) {
+//            Map<String, String> map = new HashMap<>();
+//            map.put("value",arrMenu.get(i).toString());
+//            listMenu.add(map);
+//        }
+//        return listMenu;
+//    }
 
     public List<Map<String,String>> getRightButtonList() {
         List<Map<String,String>> getRightButtonList = new ArrayList<>();
