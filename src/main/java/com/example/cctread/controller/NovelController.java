@@ -51,13 +51,19 @@ public class NovelController {
         Date end_date=cctNovel.getUpdateDate();//书籍最后更新时间
         int book_like=cctNovel.getBookLike();//书籍点赞数量
         String novel_type=cctNovel.getNovelType();//书籍分类
+        String novel_cover=cctNovel.getNovelCover();
 
-        String downUrl=novelService.getShutdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
-        System.out.println(downUrl);
+        String downloadUrl=novelService.getShutdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
+        System.out.println(downloadUrl);
         //固定栏右侧按钮
         List rightButtonList = getRightButtonList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
         model.addAttribute("rightButtonList", rightButtonList);
+        model.addAttribute("novelTitle", novel_title);
+        model.addAttribute("bookIntro", intro);
+        model.addAttribute("author", author);
+        model.addAttribute("novelCover",novel_cover );
+        model.addAttribute("downloadUrl",downloadUrl );
         return "novelpage/novelinfo";
     }
 
@@ -94,24 +100,6 @@ public class NovelController {
             }
         }
     }
-
-//    public List<Map<String,String>> getListMueu() {
-//        List<Map<String,String>> listMenu = new ArrayList<>();
-//        ArrayList  arrMenu = new ArrayList();
-//        arrMenu.add("古代言情");
-//        arrMenu.add("现代言情");
-//        arrMenu.add("玄幻仙侠");
-//        arrMenu.add("浪漫青春");
-//        arrMenu.add("都市校园");
-//        arrMenu.add("悬疑灵异");
-//        arrMenu.add("改编频道");
-//        for(int i=0; i<arrMenu.size(); i++) {
-//            Map<String, String> map = new HashMap<>();
-//            map.put("value",arrMenu.get(i).toString());
-//            listMenu.add(map);
-//        }
-//        return listMenu;
-//    }
 
     public List<Map<String,String>> getRightButtonList() {
         List<Map<String,String>> getRightButtonList = new ArrayList<>();
