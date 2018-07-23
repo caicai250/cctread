@@ -52,7 +52,7 @@ public class NovelServiceImpl implements NovelService {
     }
 
     @Override
-    public String getShowdownUrl(String filePath) {
+    public String getShutdownUrl(String filePath) {
         return TencentCOS.getDownUrl(filePath);
     }
 }

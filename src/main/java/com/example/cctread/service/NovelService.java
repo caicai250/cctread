@@ -40,5 +40,5 @@ public interface NovelService {
      * @param filePath
      * @return
      */
-    String getShowdownUrl(String filePath);
+    String getShutdownUrl(String filePath);
 }

@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Auther: caic
@@ -45,7 +42,17 @@ public class NovelController {
         if(cctNovel==null){
             throw new CctException("没有查询到当前书籍，请联系管理员");
         }
-        String downUrl=novelService.getShowdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
+        //下面是书籍的一些信息获取，你可以参考一下。后台都做好了，如果有异常，我再看看。
+        String novel_title=cctNovel.getNovelTitle();//书籍名称
+        String intro=cctNovel.getIntro();//书籍简介
+        String author = cctNovel.getAuthor();//书籍作者
+        String url=novelService.getShutdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");//书籍下载url
+        Date start_date=cctNovel.getStartDate();//书籍开始时间
+        Date end_date=cctNovel.getUpdateDate();//书籍最后更新时间
+        int book_like=cctNovel.getBookLike();//书籍点赞数量
+        String novel_type=cctNovel.getNovelType();//书籍分类
+
+        String downUrl=novelService.getShutdownUrl("/book/"+cctNovel.getNovelId()+"/"+cctNovel.getNovelTitle()+".txt");
         System.out.println(downUrl);
         //固定栏右侧按钮
         List rightButtonList = getRightButtonList();
