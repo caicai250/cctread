@@ -26,8 +26,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository());
-        http.authorizeRequests().antMatchers("/main").permitAll();
-        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests()
+                // 所有用户均可访问的资源
+                .antMatchers("/css/**", "/js/**","/image/**", "/webjars/**").permitAll()
+                .antMatchers("/main").permitAll()
+                //.anyRequest().authenticated()
+                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll();
     }
 
 }
