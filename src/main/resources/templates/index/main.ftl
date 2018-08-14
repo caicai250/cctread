@@ -9,6 +9,7 @@
     <#--<script src="${request.contextPath}/webjars/popper.js/1.14.1/popper.js"></script>-->
     <#import "main-macro.ftl" as main>
     <#import  "../macro/nav.ftl" as nav>
+    <#import  "../macro/advert.ftl" as adverts>
 
 </head>
     <body>
@@ -39,7 +40,7 @@
                 </div>
             </div>
 
-            <@main.advert advertPath=request.contextPath+"/image/ad.jpg" />
+            <@adverts.advert advertPath=request.contextPath+"/image/ad.jpg" />
 
             <div class="container recommend-container">
                 <@main.rankData title="排行榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
@@ -54,7 +55,7 @@
                 <@main.rankData title="本周推荐" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="" />
             </div>
 
-            <@main.advert advertPath=request.contextPath+"/image/ad4.jpg" />
+            <@adverts.advert advertPath=request.contextPath+"/image/ad4.jpg" />
 
             <div class="container recommend-container">
                 <div class="classify-article">
@@ -77,7 +78,7 @@
                 <@main.bookType bookTypeName="科幻游戏" romanceList=modernRomanceList />
             </div>
 
-            <@main.advert advertPath=request.contextPath+"/image/ad2.jpg" />
+            <@adverts.advert advertPath=request.contextPath+"/image/ad2.jpg" />
 
             <div class="container recommend-container">
                 <@main.rankData title="收藏榜" rankList=collectionList imgSrc=request.contextPath+"/image/rank1.jpg" isCount=true unit="月票" />

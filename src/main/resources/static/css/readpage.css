@@ -1,0 +1,166 @@
+.read-tit-container,.ad-container {
+    margin-top: 20px;
+}
+
+.read_tit {
+    height: 32px;
+    padding-top: 10px;
+}
+
+.read_tit .btn {
+    float: right;
+    padding-right: 5px;
+}
+
+.read_tit .btn ul {
+    margin: 0;
+}
+
+.read_tit .btn li {
+    float: left;
+    margin: 0 0 0 5px;
+    display: inline;
+    width: 60px;
+    height: 23px;
+    text-align: center
+}
+
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+.read_tit .setting .fontColor, .read_tit .setting .fontSize {
+    float: left;
+    margin-left: 10px;
+    display: inline;
+}
+
+.read_tit .setting .fontColor strong, .read_tit .setting .fontSize strong {
+    float: left;
+    margin: 0 5px 0 0;
+}
+
+color-mode strong {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.color-mode span {
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 0 20px 0 0;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+}
+
+.color-mode .mode_yellow {
+    background-color: #faf3eb;
+}
+
+.color-mode .mode_orange {
+    background-color: #f6ead2;
+}
+
+.color-mode .mode_green {
+    background-color: #eaf0e7;
+}
+
+.color-mode .mode_blue {
+    background-color: #e8eff3;
+}
+
+.color-mode .mode_pink {
+    background-color: #f5e4e4;
+}
+
+.color-mode .mode_gray {
+    background-color: #e5e5e5;
+}
+
+.color-mode .mode_black {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+.read_tit .setting .fontSize span {
+    float: left;
+    margin-right: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.read-content-container {
+    margin-top: 20px;
+}
+
+.chapter-read {
+    background: #ebe5d8;
+    border: 1px solid #d9caca;
+    padding: 30px 50px 50px;
+    margin: 0 0 20px;
+}
+
+.chapter-read .chapter-title {
+    font-weight: normal;
+    color: #666;
+    font-size: 36px;
+    text-align: center;
+    height: 70px;
+    line-height: 70px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+.chapter-main {
+    font-family: Microsoft YaHei;
+    font-size: 18px;
+    margin: 30px 0 0;
+    overflow: hidden;
+    zoom: 1;
+    /*color: #333;*/
+    font-family: "KaiTi";
+    font-size: 22px;
+}
+
+.chapter-control {
+    width:100%;
+    margin-top: 20px;
+    background: #ebe5d8;
+    border: 1px solid #d9caca;
+    margin: 0 0 20px;
+    padding: 0px;
+}
+
+.chapter-control li {
+    float: left;
+    width: 50%;
+    text-align: center;
+    border-left: 1px solid #d9caca;
+    margin: 0 0 0 -1px;
+    display: inline;
+}
+
+.chapter-control .chapter-prev a {
+    padding: 10px 0 10px 25%;
+}
+.chapter-control li a em {
+    display: block;
+    font-style: normal;
+    /*color: #000;*/
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.chapter-control .chapter-next a {
+    padding: 10px 25% 10px 0;
+}

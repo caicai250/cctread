@@ -6,13 +6,6 @@
 
 </head>
 <body>
-    <#--自定义广告模板-->
-    <#macro advert advertPath>
-    <div class="container ad-container">
-        <a href="#"><img class="index-logo" src="${advertPath}"></a>
-    </div>
-    </#macro>
-
     <#--自定义模块名-->
     <#macro modelName name>
         <div class="model-name">
