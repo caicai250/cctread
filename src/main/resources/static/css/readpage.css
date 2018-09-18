@@ -129,6 +129,10 @@ color-mode strong {
     font-size: 22px;
 }
 
+.chapter-main p{
+    text-indent:2em;
+}
+
 .chapter-control {
     width:100%;
     margin-top: 20px;

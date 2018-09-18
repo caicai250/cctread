@@ -20,7 +20,7 @@
         <#--阅读界面设置，可以选择颜色，字体大小-->
         <@readpage.readset />
         <#--阅读界面-->
-        <@readpage.readcontent />
+        <@readpage.readcontent chapterInfo=chapterInfo/>
     </div>
 
 </body>
@@ -65,5 +65,18 @@
     function changeThemeFontSize(fontSize) {
         $("#auto-chapter").css("font-size",fontSize);
     }
+
+    $(function() {
+        $.get("${request.contextPath}/getChapterTXT",{novelId:"27",chapterId:"8249"},function(data,status){
+            if(status=='success'){
+                var str=data.replace(/\n/g, "</p><p>");
+                $("#auto-chapter").html("<p id='title'>"+str+"</p>");
+            }else{
+                alert("本章内容获取异常，请联系管理员");
+            }
+            $("#title").remove();
+        });
+            }
+    );
 </script>
 

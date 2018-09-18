@@ -16,4 +16,6 @@ public interface CctChapterMapper {
     List<CctChapter> selectChapterList(@Param("novelId") int novelId, @Param("start") int start, @Param("limit") int limit);
     CctChapter getChapter(int chapterId);
     CctChapter getFirstChapter(int novelId);
+    int getChapterNum(int novelId);
+    List<CctChapter> selectAllChapterList(int novelId);
 }

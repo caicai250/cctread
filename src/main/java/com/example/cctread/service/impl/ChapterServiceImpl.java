@@ -3,6 +3,7 @@ package com.example.cctread.service.impl;
 import com.example.cctread.dao.CctChapterMapper;
 import com.example.cctread.domain.CctChapter;
 import com.example.cctread.service.ChapterService;
+import com.example.cctread.vo.Paging;
 import com.example.cctutil.cos.TencentCOS;
 import com.example.cctutil.io.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -141,5 +142,21 @@ public class ChapterServiceImpl implements ChapterService {
             chapter=getFirstChapter(Integer.parseInt(novelId));
         }
         return TencentCOS.getObjectInputStream(chapter.getChapterPath());
+    }
+
+    @Override
+    public Paging getChapterNum(int novelId) {
+        int chapterNum=cctChapterMapper.getChapterNum(novelId);
+        Paging page=new Paging();
+        page.setCallFunName("getChapterPaging");
+        page.setPageNo(1);
+        page.setShowPages(10);
+        page.setTotalPage(chapterNum/100+1);
+        return page;
+    }
+
+    @Override
+    public List <CctChapter> selectAllChapterList(int novelId) {
+        return cctChapterMapper.selectAllChapterList(novelId);
     }
 }

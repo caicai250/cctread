@@ -2,12 +2,14 @@ package com.example.cctread.controller;
 
 import com.example.cctread.service.CodeService;
 import com.example.cctutil.cos.TencentCOS;
+import com.example.cctutil.sysutil.SysUtil;
 import com.example.entity.vo.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +22,9 @@ public class MainController {
     private CodeService codeService;
 
     @RequestMapping(value = "/main")
-    public String index(ModelMap model) {
+    public String index(ModelMap model,HttpServletRequest request) {
         //固定栏右侧按钮
-        List rightButtonList = getRightButtonList();
+        List rightButtonList = SysUtil.getRightButtonList();
         //头条列表
         List tilteMenu = getTitleMenu();
         //现代言情列表
@@ -56,21 +58,6 @@ public class MainController {
 
         model.addAttribute("book", book);
         return "index/main";//返回的内容就是templetes下面文件的名称
-    }
-
-    public List<Map<String,String>> getRightButtonList() {
-        List<Map<String,String>> getRightButtonList = new ArrayList<>();
-        ArrayList  arrMenu = new ArrayList();
-        arrMenu.add("登录");
-        arrMenu.add("注册");
-        arrMenu.add("我的书架");
-        arrMenu.add("联系客服");
-        for(int i=0; i<arrMenu.size(); i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("value",arrMenu.get(i).toString());
-            getRightButtonList.add(map);
-        }
-        return getRightButtonList;
     }
 
     public List<Map<String,String>> getTitleMenu() {

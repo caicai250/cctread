@@ -1,6 +1,7 @@
 package com.example.cctread.service;
 
 import com.example.cctread.domain.CctChapter;
+import com.example.cctread.vo.Paging;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,4 +68,18 @@ public interface ChapterService {
      * @return
      */
     InputStream getChapterInputStream(String novelId, String chapterId);
+
+    /**
+     * 获取章节列表分页信息
+     * @param novelId
+     * @return
+     */
+    Paging getChapterNum(int novelId);
+
+    /**
+     * 获取全部章节列表
+     * @param novelId
+     * @return
+     */
+    List<CctChapter> selectAllChapterList(int novelId);
 }

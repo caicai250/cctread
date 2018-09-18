@@ -3,7 +3,6 @@ package com.example.cctread.controller;
 import com.example.cctread.domain.CctChapter;
 import com.example.cctread.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Auther: caic
@@ -43,6 +41,19 @@ public class ChapterController {
     }
 
     /**
+     * 获取全部章节列表
+     * @param model
+     * @param novelId
+     * @return
+     */
+    @RequestMapping(value="/getallchapterlist")
+    @ResponseBody
+    public Object selectAllChapterList(ModelMap model, @RequestParam ( value = "novelId" ) String novelId) {
+        List<CctChapter> list=chapterService.selectAllChapterList(Integer.parseInt(novelId));
+        return list;
+    }
+
+    /**
      * 获取章节文本内容，若没有章节id，则取书籍id的第一章。
      * @param model
      * @param chapterId
@@ -51,27 +62,22 @@ public class ChapterController {
      */
     @RequestMapping(value="getChapterTXT")
     @ResponseBody
-    public void getChapterTXT(ModelMap model, @RequestParam (value="chapterId",required=false) String chapterId, @RequestParam(value="novelId",required=false) String novelId, HttpServletResponse response) {
-//        return chapterService.getChapterTXT(novelId,chapterId);
+    public String getChapterTXT(ModelMap model, @RequestParam (value="chapterId",required=false) String chapterId, @RequestParam(value="novelId",required=false) String novelId, HttpServletResponse response) {
         InputStream input = null;
-        OutputStream out = null;
+        String str ="";
         try {
-            out = response.getOutputStream();
             input = chapterService.getChapterInputStream(novelId, chapterId);
-            byte[] b = new byte[1024];
-            int len = 0;
-            while ((len = input.read(b)) != -1) {
-                out.write(b, 0, len);
-            }
+            str = new BufferedReader(new InputStreamReader(input, "GBK"))
+                    .lines().collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (out != null) out.close();
                 if (input != null) input.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        return str;
     }
 }

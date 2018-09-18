@@ -25,11 +25,19 @@
         select * from cct_chapter where novel_id=#{novelId} limit #{start},#{limit}
     </select>
 
+    <select id="selectAllChapterList" resultMap="chapterList" parameterType="int">
+        select * from cct_chapter where novel_id=#{novelId}
+    </select>
+
     <select id="getChapter" resultMap="chapterList" parameterType="int">
         select * from cct_chapter where chapter_id=#{chapterId}
     </select>
 
     <select id="getFirstChapter" resultMap="chapterList" parameterType="int">
         select * from cct_chapter where chapter_id=(select min(chapter_id) from cct_chapter where novel_id=#{novelId})
+    </select>
+
+    <select id="getChapterNum" resultType="int" parameterType="int">
+        select count(*) count from cct_chapter where novel_id=#{novelId}
     </select>
 </mapper>

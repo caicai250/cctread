@@ -1,9 +1,12 @@
 package com.example.cctread.controller;
 
+import com.example.cctread.domain.CctChapter;
 import com.example.cctread.domain.CctNovel;
+import com.example.cctread.service.ChapterService;
 import com.example.cctread.service.NovelService;
 import com.example.cctread.service.CodeService;
 import com.example.cctutil.exception.CctException;
+import com.example.cctutil.sysutil.SysUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,6 +33,9 @@ public class ReadController {
     @Autowired
     private CodeService codeService;
 
+    @Autowired
+    ChapterService chapterService;
+
     /**
      * 跳转到章节页面，查询当前书籍信息
      * @param model
@@ -39,6 +45,7 @@ public class ReadController {
     @RequestMapping ( value = "/toreadpage" )
     public String toReadPage(ModelMap model, @RequestParam ( value = "novelId" ) String novelId) {
         CctNovel cctNovel= novelService.selectNovel(novelId);
+        CctChapter chapter= chapterService.getChapter(8249);
         if(cctNovel==null){
             throw new CctException("没有查询到当前书籍，请联系管理员");
         }
@@ -48,24 +55,11 @@ public class ReadController {
         String author = cctNovel.getAuthor();//书籍作者
         String novel_cover=cctNovel.getNovelCover();
         //固定栏右侧按钮
-        List rightButtonList = getRightButtonList();
+        List rightButtonList = SysUtil.getRightButtonList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
         model.addAttribute("rightButtonList", rightButtonList);
+        model.addAttribute("chapterInfo",chapter);
         return "readpage/readpageinfo";
     }
 
-    public List<Map<String,String>> getRightButtonList() {
-        List<Map<String,String>> getRightButtonList = new ArrayList<>();
-        ArrayList  arrMenu = new ArrayList();
-        arrMenu.add("登录");
-        arrMenu.add("注册");
-        arrMenu.add("我的书架");
-        arrMenu.add("联系客服");
-        for(int i=0; i<arrMenu.size(); i++) {
-            Map<String, String> map = new HashMap<>();
-            map.put("value",arrMenu.get(i).toString());
-            getRightButtonList.add(map);
-        }
-        return getRightButtonList;
-    }
 }

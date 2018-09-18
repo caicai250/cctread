@@ -40,12 +40,12 @@
  </#macro>
 
 <#--阅读界面-->
-<#macro readcontent>
+<#macro readcontent chapterInfo>
      <div class="container read-content-container">
          <div class="chapter-read">
-             <h1 class="chapter-title">第1章   全军覆没</h1>
+             <h1 class="chapter-title">${chapterInfo.chapterName}</h1>
              <div class="chapter-main" id="auto-chapter" >
-                 世上安得两全法，不负如来不负卿
+
              </div>
          </div>
 
