@@ -11,8 +11,8 @@
 #mc-canvas {
 	width:220px;  /* For best results, set width to between 210px and 240px */
 	height:154px; /* For best results, set height to between 140px and 170px */
-	background:#fff -9999px -9999px no-repeat;
-	background-image: url('../image/motionCaptcha-shapes.jpg') !important;
+	background:rgba(255,255,255,0) -9999px -9999px no-repeat;
+	background-image: url('../image/motionCaptcha-shapes.png') !important;
 }
 
 /* The shapes: */

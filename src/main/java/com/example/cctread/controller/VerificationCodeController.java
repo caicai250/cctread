@@ -2,6 +2,8 @@ package com.example.cctread.controller;
 
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @Auther: caic
  * @Date: 2018/9/7 11:28
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class VerificationCodeController {
 
-    public void getVerificationCode(){
+    public void getVerificationCode(HttpServletResponse response){
 //        response.setDateHeader("Expires", 0);
 //        // Set standard HTTP/1.1 no-cache headers.
 //        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");

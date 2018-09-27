@@ -33,16 +33,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository()).requireCsrfProtectionMatcher(
-                httpServletRequest -> httpServletRequest.getMethod().equals("POST")
-        );
-      //  http.csrf().disable();
+//        http.csrf().csrfTokenRepository(new CookieCsrfTokenRepository()).requireCsrfProtectionMatcher(
+//                httpServletRequest -> httpServletRequest.getMethod().equals("POST")
+//        );
+        http.csrf().disable();
         http.authorizeRequests()
                 // 所有用户均可访问的资源
                 .antMatchers("/css/**", "/js/**","/image/**", "/webjars/**").permitAll()
                 .antMatchers("/signIn","/signInUser").permitAll()
+                .antMatchers("/main").permitAll()
                 .anyRequest().fullyAuthenticated()//authenticated()
-                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password").failureForwardUrl("/login?error=true").permitAll()
+                .and().formLogin().loginPage("/login").usernameParameter("username").passwordParameter("password")
+                .failureUrl("/login?error=true").successForwardUrl("/main").permitAll()
                 .and().logout().logoutUrl("/logout").permitAll();
     }
 

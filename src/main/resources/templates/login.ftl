@@ -23,10 +23,11 @@
                         <i class="fa fa-lock fa-lg"></i>
                         <input class="form-control required" type="password" placeholder="Password" id="password" name="password" maxlength="8"/>
 
-                        <#if param.error==session.SPRING_SECURITY_LAST_EXCEPTION.message>
+                       <#-- <#if param.error==session.SPRING_SECURITY_LAST_EXCEPTION.message>
                             <span class="help-block" style="color:red">用户或密码错误请输密码</span>
-                        </#if>
+                        </#if>-->
 
+                        <#--${Session.SPRING_SECURITY_LAST_EXCEPTION.message}-->
                     </div>
 
                     <div id="mc">
@@ -40,8 +41,9 @@
                             <input type="checkbox" name="remember" value="1"/>记住我
                         </label>
                     </div>
-                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
+                    <#--<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">-->
                     <div class="form-group col-md-offset-9">
+                        <a class="btn btn-success pull-right" href="${request.contextPath}/signIn">注册</a>
                         <input type="submit" class="btn btn-success pull-right" name="submit" value="登录"/>
                     </div>
                 </div>
@@ -56,5 +58,6 @@
 
 <script>
     $('#mc-form').motionCaptcha();
+
 </script>
 </html>
