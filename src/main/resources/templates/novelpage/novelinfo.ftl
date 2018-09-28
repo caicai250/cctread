@@ -13,7 +13,7 @@
 <body>
     <div id="navel-info-container">
         <#--固定导航栏、logo  --每个页面都要显示-->
-        <@nav.commonNav listMuen=listMuen rightButtonList=rightButtonList />
+        <@nav.commonNav listMuen=listMuen />
         <#--书籍封面/简介/操作按钮-->
         <@novelInfo.novelInfoData novelTitle=novelTitle author=author bookIntro=bookIntro downloadUrl=downloadUrl />
 

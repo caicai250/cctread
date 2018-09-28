@@ -55,9 +55,9 @@ public class ReadController {
         String author = cctNovel.getAuthor();//书籍作者
         String novel_cover=cctNovel.getNovelCover();
         //固定栏右侧按钮
-        List rightButtonList = SysUtil.getRightButtonList();
+        //List rightButtonList = SysUtil.getRightButtonList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
-        model.addAttribute("rightButtonList", rightButtonList);
+        //model.addAttribute("rightButtonList", rightButtonList);
         model.addAttribute("chapterInfo",chapter);
         return "readpage/readpageinfo";
     }

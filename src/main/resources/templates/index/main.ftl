@@ -14,7 +14,7 @@
 </head>
     <body>
         <div id="home-container">
-            <@nav.commonNav listMuen=listMuen rightButtonList=rightButtonList />
+            <@nav.commonNav listMuen=listMuen/>
             <div class="container book-style-contaoner">
                 <ul class="nav navbar-nav" style="margin-top:0">
                     <li>

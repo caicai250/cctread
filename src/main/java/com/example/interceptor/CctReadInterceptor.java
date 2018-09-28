@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Auther: caic
  * @Date: 2018/6/28 15:21
- * @Description:
+ * @Description: 拦截器
  * @Version: 1.0
  */
 public class CctReadInterceptor implements HandlerInterceptor {

@@ -24,7 +24,7 @@ public class MainController {
     @RequestMapping(value = "/main")
     public String index(ModelMap model,HttpServletRequest request) {
         //固定栏右侧按钮
-        List rightButtonList = SysUtil.getRightButtonList();
+        //List rightButtonList = SysUtil.getRightButtonList();
         //头条列表
         List tilteMenu = getTitleMenu();
         //现代言情列表
@@ -38,7 +38,7 @@ public class MainController {
         //分类好文
         List classifyArticleList = getClassifyArticleList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
-        model.addAttribute("rightButtonList", rightButtonList);
+        //model.addAttribute("rightButtonList", rightButtonList);
         model.addAttribute("titleMenu", tilteMenu);
         model.addAttribute("modernRomanceList", modernRomanceList);
         model.addAttribute("collectionList", collectionList);

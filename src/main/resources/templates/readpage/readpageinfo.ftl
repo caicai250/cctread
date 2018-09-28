@@ -14,7 +14,7 @@
 <body>
     <div id="read-info-container">
         <#--固定导航栏、logo  --每个页面都要显示-->
-        <@nav.commonNav listMuen=listMuen rightButtonList=rightButtonList />
+        <@nav.commonNav listMuen=listMuen/>
         <#--广告-->
         <@adverts.advert advertPath=request.contextPath+"/image/ad.jpg" />
         <#--阅读界面设置，可以选择颜色，字体大小-->

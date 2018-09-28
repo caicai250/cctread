@@ -17,17 +17,17 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <i class="fa fa-user fa-lg"></i>
-                        <input class="form-control required" type="text" placeholder="Username" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+                        <input class="form-control required" type="text" placeholder="请输入账号" id="username" name="username" autofocus="autofocus" maxlength="20"/>
                     </div>
                     <div class="form-group">
                         <i class="fa fa-lock fa-lg"></i>
-                        <input class="form-control required" type="password" placeholder="Password" id="password" name="password" maxlength="8"/>
+                        <input class="form-control required" type="password" placeholder="请输入密码" id="password" name="password" maxlength="8"/>
 
-                       <#-- <#if param.error==session.SPRING_SECURITY_LAST_EXCEPTION.message>
-                            <span class="help-block" style="color:red">用户或密码错误请输密码</span>
-                        </#if>-->
-
-                        <#--${Session.SPRING_SECURITY_LAST_EXCEPTION.message}-->
+                        <#if RequestParameters.error??>
+                            <#if Session.SPRING_SECURITY_LAST_EXCEPTION??>
+                                <span class="help-block" style="color:red">${Session.SPRING_SECURITY_LAST_EXCEPTION.message}</span>
+                            </#if>
+                        </#if>
                     </div>
 
                     <div id="mc">
@@ -36,15 +36,10 @@
                         </canvas>
                     </div>
 
-                    <div class="form-group">
-                        <label class="checkbox">
-                            <input type="checkbox" name="remember" value="1"/>记住我
-                        </label>
-                    </div>
-                    <#--<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">-->
+                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}">
                     <div class="form-group col-md-offset-9">
+                        <input type="submit" class="btn btn-success pull-right" name="submit" id="submit" value="登录" disabled/>
                         <a class="btn btn-success pull-right" href="${request.contextPath}/signIn">注册</a>
-                        <input type="submit" class="btn btn-success pull-right" name="submit" value="登录"/>
                     </div>
                 </div>
             </div>
@@ -57,7 +52,15 @@
 <script src="${request.contextPath}/js/jquery.motionCaptcha.0.2.js"></script>
 
 <script>
-    $('#mc-form').motionCaptcha();
+    $('#mc-form').motionCaptcha({
+        actionId :'#mc-form',
+        canvasId :'#mc-canvas',
+        divId :'#mc',
+        submitId:'#submit',
+        errorMsg: '请重新绘制',
+        successMsg: '验证成功',
+        label: '<p>请在方框内画出形状提交表格:</p>'
+    });
 
 </script>
 </html>

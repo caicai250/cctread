@@ -67,9 +67,9 @@ public class NovelController {
 
         List<CctChapter> list=chapterService.selectAllChapterList(Integer.parseInt(novelId));
         //固定栏右侧按钮
-        List rightButtonList = SysUtil.getRightButtonList();
+        //List rightButtonList = SysUtil.getRightButtonList();
         model.addAttribute("listMuen", codeService.findCode("BOOKTYPE"));
-        model.addAttribute("rightButtonList", rightButtonList);
+        //model.addAttribute("rightButtonList", rightButtonList);
         model.addAttribute("novelTitle", novel_title);
         model.addAttribute("bookIntro", intro);
         model.addAttribute("author", author);

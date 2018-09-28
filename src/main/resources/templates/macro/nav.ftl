@@ -5,7 +5,7 @@
 </head>
 <body>
     <#--固定导航栏、logo  --每个页面都要显示-->
-    <#macro commonNav listMuen rightButtonList>
+    <#macro commonNav listMuen>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="collapse navbar-collapse" id="navbar-collapse">
@@ -18,9 +18,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <input type="text" placeholder="搜索" class="navbar-input">
                         <button class="glyphicon glyphicon-search navbar-button"></button>
-                        <#list rightButtonList as em>
-                            <li><a href="">${em.value}</a> </li>
-                        </#list>
+                        <li><a href="${request.contextPath}/login">登陆</a> </li>
+                        <li><a href="${request.contextPath}/signIn">注册</a> </li>
+                        <li><a href="">我的书架</a> </li>
+                        <li><a href="">联系客服</a> </li>
                     </ul>
                 </div>
             </div>
